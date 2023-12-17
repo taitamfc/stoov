@@ -1,0 +1,383 @@
+@font-face {
+    font-family: "DIN Pro";
+    src: url("../fonts/dinpro/DINPro-Medium.woff2") format("woff2"), url("../fonts/dinpro/DINPro-Medium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "DIN Pro";
+    src: url("../fonts/dinpro/DINPro.woff2") format("woff2"), url("../fonts/dinpro/DINPro.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "DIN Pro";
+    src: url("../fonts/dinpro/DINPro-Light.woff2") format("woff2"), url("../fonts/dinpro/DINPro-Light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "DIN Pro";
+    src: url("../fonts/dinpro/DINPro-Bold.woff2") format("woff2"), url("../fonts/dinpro/DINPro-Bold.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "DIN Pro";
+    src: url("../fonts/dinpro/DINPro-Black.woff2") format("woff2"), url("../fonts/dinpro/DINPro-Black.woff") format("woff");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    font-family: "DIN Pro";
+    padding: 0;
+    color: #0b2e40;
+    font-weight: 300;
+    line-height: 1.6;
+    font-size: 18px;
+    word-wrap: break-word;
+    position: relative;
+}
+
+p {
+    margin-bottom: 0.5rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    color: #1A314E;
+    margin-bottom: 1.5rem;
+}
+
+.frontend {
+    padding: 50px 0;
+}
+
+.frontend h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+form {
+    padding: 50px 0;
+}
+
+form select,
+form input[type="text"],
+form input[type="email"],
+form input[type="url"],
+form input[type="password"],
+form input[type="search"],
+form input[type="number"],
+form input[type="tel"],
+form input[type="range"],
+form input[type="date"],
+form input[type="month"],
+form input[type="week"],
+form input[type="time"],
+form input[type="datetime"],
+form input[type="datetime-local"],
+form input[type="color"],
+form textarea {
+    border: 1px solid #bbb;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    display: block;
+    width: 100%;
+    height: 42px;
+    padding-left: 15px;
+}
+
+form .gform_section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 15px;
+}
+
+form .gf-col-2 .ginput-col-3 label,
+form .gform_fileupload_rules,
+form .gfield_description,
+form label.font-small {
+    font-size: 14px;
+    width: 100%;
+}
+
+.ginput-col-3 {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.ginput-col-3 .ginput-col {
+    width: calc(31% - 7.5px);
+}
+
+.ginput-col-3 .ginput-col.last_name {
+    width: calc(40% - 7.5px);
+}
+
+.clear-multi.ginput-col-3 .ginput-col {
+    width: calc(100% / 3 - 7.5px);
+}
+
+form .gfield_required {
+    color: #1A314E;
+}
+
+form ul {
+    padding: 0;
+    margin: 0;
+}
+
+form .gfield h2 {
+    margin-bottom: 0;
+    font-size: 1.25em;
+    font-weight: 700;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+form .gfield {
+    width: 100%;
+}
+
+form .gfield select,
+form .gfield input {
+    width: calc(50% - 7.5px);
+}
+
+form .gfield+.gfield {
+    margin-top: 15px;
+}
+
+form label {
+    font-size: 18px;
+    opacity: 1;
+    font-weight: bold;
+    margin: 0;
+}
+
+form .gf-col-2 {
+    width: calc(60% - 7.5px);
+}
+
+form .gfield.gf-col-2 select,
+form .gfield.gf-col-2 input {
+    width: 100%;
+}
+
+form .gfield .gfield-choice-input {
+    width: unset;
+}
+
+form .captcha {
+    margin-top: 15px;
+}
+
+.main-content-page form [type="submit"] {
+    -webkit-appearance: button;
+    font-size: 1em;
+    margin: 0 16px 0 0;
+    width: auto;
+    box-shadow: none;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    border: 1px solid;
+    border-radius: 3px;
+    padding: 8px 20px;
+    color: #1A314E;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+input[type=button].btn-block,
+input[type=reset].btn-block,
+input[type=submit].btn-block {
+    width: unset;
+}
+
+body .btn-primary:hover {
+    background-color: #910034;
+    border-color: #910034;
+}
+
+.side-navbar li a:focus,
+.side-navbar li a:hover,
+.side-navbar li.active>a,
+.side-navbar li [aria-expanded="true"],
+.side-navbar li a:focus i,
+.side-navbar li a:hover i,
+.side-navbar li.active>a i,
+.side-navbar li [aria-expanded="true"] i,
+.side-navbar li a:hover i,
+.side-navbar li a:hover {
+    color: #ffff;
+    background-color: #910034;
+    border-color: #910034;
+}
+
+.side-navbar li a:focus i,
+.side-navbar li a:hover i,
+.side-navbar li.active>a i,
+.side-navbar li [aria-expanded="true"] i,
+.side-navbar li a:hover i {
+    background: none;
+    border: none;
+}
+
+form .gform_footer.top_label {
+    margin-top: 30px;
+}
+
+form textarea {
+    height: 160px;
+    width: 100%;
+}
+
+form .gchoice {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+form .gfield .gfield-choice-input {
+    margin-right: 5px;
+}
+
+form .ginput_container_radio {
+    margin-top: 15px;
+}
+
+form label.error {
+    color: #1A314E;
+    width: 100%;
+}
+
+ul.gfield_checkbox.erro_box,
+ul.gfield_radio.erro_box {
+    position: relative;
+    padding-bottom: 30px;
+}
+
+ul.gfield_checkbox.erro_box label.error,
+ul.gfield_radio.erro_box label.error {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* Introduce email contact */
+.introduce p.email-thanks {
+    font-size: 18px;
+    padding-top: 18px;
+}
+
+.introduce p.email-thanks.first {
+    padding-top: 0px;
+}
+
+.introduce {
+    width: 60%;
+    margin: 0 auto;
+}
+
+footer.main-footer {
+
+    margin-top: auto;
+}
+
+div#content {
+    display: flex;
+    flex-flow: column;
+    min-height: calc(100vh - 62px);
+    padding: 0;
+}
+
+.brand-big img {
+    height: 90px;
+    object-fit: cover;
+    width: auto;
+}
+
+#accordion .card-header {
+    border-bottom: none;
+    background: #910034;
+    color: #fff;
+    font-weight: bold;
+    padding: 0;
+    border-radius: 0;
+}
+
+#accordion .card-header button.btn.btn-link {
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none;
+    cursor: unset !important;
+}
+
+#accordion strong {
+    font-weight: bold;
+}
+
+#accordion .card-body {
+    padding: 0.5rem 0.75rem;
+}
+
+#accordion .card {
+    border-radius: 0;
+    border: none;
+    background-color: #FFFFFF;
+    box-shadow: none;
+}
+
+#accordion table {
+    margin: 10px 0;
+}
+
+#accordion table caption,
+#accordion table th,
+#accordion table td {
+    padding: 15px 10px;
+    vertical-align: middle !important;
+    font-weight: bold;
+    font-size: 18px;
+    color: #0b2e40;
+    border: 1px solid #ccc;
+}
+
+#accordion table caption,
+#accordion table th {
+    background: #f3f3f3;
+}
+
+#accordion table caption {
+    caption-side: top;
+    font-size: 24px;
+}
+
+.btn-pdf {
+    padding: 0 0 15px;
+}
