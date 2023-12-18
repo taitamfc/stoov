@@ -16,6 +16,8 @@
                         <th>{{ __('Plaats') }}</th>
                         <th>{{ __('Keurmerk') }}</th>
                         <th>{{ __('Stoov klant') }}</th>
+                        <th>{{ __('E-mailadres contact') }}</th>
+                        <th>{{ __('E-mailadres administratie') }}</th>
                         <th class="not-exported">{{ __('Action') }}</th>
                     </tr>
                 </thead>
@@ -45,7 +47,7 @@
                             <div class="col-md-6 form-group">
                                 <label>{{ __('Organisatie') }} *</label>
                                 <input type="text" name="organisatie" id="organisatie" required class="form-control"
-                                    placeholder="should be unique">
+                                    placeholder="Organisatie">
                             </div>
 
                             <div class="col-md-6 form-group">
@@ -78,19 +80,19 @@
                                     placeholder="{{ __('Plaats') }}">
                             </div>
 
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group d-none">
                                 <label>{{ __('Glass label') }}</label>
                                 <input type="text" name="glaskeur" id="glaskeur" class="form-control"
                                     placeholder="{{ __('Glass label') }}">
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <label>{{ __('Contact Persoon') }}</label>
+                                <label>{{ __('Contactpersoon') }}</label>
                                 <input type="text" name="contact_persoon" id="contact_persoon" class="form-control"
-                                    placeholder="{{ __('Contact Persoon') }}">
+                                    placeholder="{{ __('Contactpersoon') }}">
                             </div>
 
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group d-none">
                                 <label>{{ __('Functie') }}</label>
                                 <input type="text" name="functie" id="functie" class="form-control"
                                     placeholder="{{ __('Functie') }}">
@@ -103,9 +105,9 @@
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <label>{{ __('E-mail address') }}</label>
+                                <label>{{ __('E-mailadres') }}</label>
                                 <input type="text" name="emailadres" id="emailadres" class="form-control"
-                                    placeholder={{ __('E-mail address') }}>
+                                    placeholder={{ __('E-mailadres') }}>
                             </div>
 
                             <div class="col-md-6 form-group">
@@ -118,6 +120,18 @@
                                 <label class="radio-inline" for="keurmerk_yes">
                                     <input type="radio" name="keurmerk" value="1" id="keurmerk_yes"> {{ __('Ja') }}
                                 </label>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>{{ __('E-mailadres contact') }}</label>
+                                <input type="text" name="email_contact" id="email_contact_input" class="form-control"
+                                    placeholder={{ __('E-mailadres contact') }}>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>{{ __('E-mailadres administratie') }}</label>
+                                <input type="text" name="email_receipt" id="email_receipt_input" class="form-control"
+                                    placeholder={{ __('E-mailadres administratie') }}>
                             </div>
 
                             <div class="col-md-12 form-group" align="center">
@@ -392,6 +406,14 @@
                             name: 'stoov_klant'
                         },
                         {
+                            data: 'email_contact',
+                            name: 'email_contact'
+                        },
+                        {
+                            data: 'email_receipt',
+                            name: 'email_receipt'
+                        },
+                        {
                             data: 'action',
                             name: 'action',
                             orderable: false
@@ -509,6 +531,7 @@
                         processData: false,
                         dataType: "json",
                         success: function(response) {
+                            console.log(response.data);
                             var html = '';
                             if (response.errors) {
                                 html = '<div class="alert alert-danger">';
@@ -535,6 +558,8 @@
                                 $('#functie').val(response.data.functie);
                                 $('#telefoonnummer').val(response.data.telefoonnummer);
                                 $('#emailadres').val(response.data.emailadres);
+                                $('#email_receipt_input').val(response.data.email_receipt);
+                                $('#email_contact_input').val(response.data.email_contact);
                                 if (response.data.keurmerk == 1) {
                                     $('#keurmerk_yes').prop('checked', true);
                                 } else {
@@ -577,6 +602,8 @@
                         $('#functie').val(html.data.functie);
                         $('#telefoonnummer').val(html.data.telefoonnummer);
                         $('#emailadres').val(html.data.emailadres);
+                        $('#email_receipt_input').val(html.data.email_receipt);
+                        $('#email_contact_input').val(html.data.email_contact);
                         $('#keurmerk').val(html.data.keurmerk);
 
                         $('#hidden_id').val(html.data.id);

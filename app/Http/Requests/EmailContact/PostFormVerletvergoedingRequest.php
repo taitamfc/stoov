@@ -39,16 +39,16 @@ class PostFormVerletvergoedingRequest extends FormRequest
     public function messages()
     {
         return[
-            'naam_bedrijf.required' => 'Het veld naam_bedrijf is verplicht.',
-            'iban_nummer.required' => 'Het veld iban_nummer is verplicht.',
-            'first_name.required' => 'Het veld first_name is verplicht.',
-            'middle_name.required' => 'Het veld middle_name is verplicht.',
-            'last_name.required' => 'Het veld last_name is verplicht.',
-            'email.required' => 'Het veld email is verplicht.',
-            'email.email' => 'Het veld email bevat geen geldig e-mailadres.',
-            'naam_cursus.required' => 'Het veld naam_cursus is verplicht.',
-            'datum_cursus_van.required' => 'Het veld datum_cursus_van is verplicht.',
-            'datum_tot.required' => 'Het veld datum_tot is verplicht.'
+            'naam_bedrijf.required' => 'Het veld Naam bedrijf is verplicht.',
+            'iban_nummer.required' => 'Het veld IBAN nummer is verplicht.',
+            'first_name.required' => 'Het veld Voornaam is verplicht.',
+            'middle_name.required' => 'Het veld Tussenvoegsel is verplicht.',
+            'last_name.required' => 'Het veld Achternaam is verplicht.',
+            'email.required' => 'Het veld E-mailadres is verplicht.',
+            'email.email' => 'Het veld E-mailadres bevat geen geldig e-mailadres.',
+            'naam_cursus.required' => 'Het veld Naam cursus is verplicht.',
+            'datum_cursus_van.required' => 'Het veld Datum cursus van is verplicht.',
+            'datum_tot.required' => 'Het veld Datum cursus tot is verplicht.'
         ];
     }
 }

@@ -198,7 +198,7 @@ class CourseService
             'deelnemersinfo_per_bestand' => $request->deelnemersinfo_per_bestand ?? $fields['deelnemersinfo_per_bestand'] ?? '',
             'aantal_deelnemers_in_cursus' => $request->aantal_deelnemers_in_cursus ?? $fields['aantal_deelnemers_in_cursus'] ?? 0,
             'medewerker' => $request->medewerker ?? $fields['medewerker'] ?? '',
-            'data_deelnemerslijst' => @$request->data_deelnemerslijst ?? @$fields['data_deelnemerslijst'] ?? ''
+            'data_deelnemerslijst' => @$request->data_deelnemerslijst ?? @$fields['data_deelnemerslijst'] ?? '',
         ];
         $params['deelnemerslijst'] = $request->hasFile('deelnemerslijst') ? $this->fileService->uploadFile($this->storageFolderPath, $request->deelnemerslijst) : $fields['deelnemerslijst'] ?? null;
         $request = $request->all();
@@ -243,12 +243,12 @@ class CourseService
             'data_deelnemerslijst' => $request->data_deelnemerslijst ?? $fields['data_deelnemerslijst'] ?? [],
             'aantal_deelnemers_in_cursus' => $request->aantal_deelnemers_in_cursus ?? $fields['aantal_deelnemers_in_cursus'] ?? '',
             'informatie_over_het_opleidingsinstituut' => $request->informatie_over_het_opleidingsinstituut ?? $fields['informatie_over_het_opleidingsinstituut'] ?? '',
+            'uw_vergoeding_bedraagt' => @$request->uw_vergoeding_bedraagt ?? @$fields['uw_vergoeding_bedraagt'] ?? ''
         ];
         $params['factuur'] = $request->hasFile('factuur') ? $this->fileService->uploadFile($this->storageFolderPath, $request->factuur) : $fields['factuur'] ?? null;
         $params['certificaat'] = $request->hasFile('certificaat') ? $this->fileService->uploadFile($this->storageFolderPath, $request->certificaat) : $fields['certificaat'] ?? null;
         $params['deelnemersinfo_per_bestand'] = $request->hasFile('deelnemersinfo_per_bestand') ? $this->fileService->uploadFile($this->storageFolderPath, $request->deelnemersinfo_per_bestand) : $fields['deelnemersinfo_per_bestand'] ?? null;
         $request = $request->all();
-
         return [
             'type' => Course::TYPE_OPLEIDINGSVERGOEDING,
             'content' => json_encode($params),

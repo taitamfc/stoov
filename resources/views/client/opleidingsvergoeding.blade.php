@@ -98,6 +98,7 @@
                                                 value="{{ $course->id }}" 
                                                 data-status="{{ $course->status }}" 
                                                 data-price="{{ $course->price }}" 
+                                                data-percentage="{{ $course->percentage }}" 
                                                 {{ ($fields['naam_cursus'] ?? null) == $course->id ? "selected" : null }}>{{ $course->value }}</option>
                                             @endforeach
                                         </select>
@@ -162,12 +163,19 @@
                                 </div>
                             </div>
                             <div id="field_totaalbedrag_subsidie_aanvraag" class="gfield gfield_contains_required   ">
-                                <label class="gfield_label" for="input_totaalbedrag_subsidie_aanvraag">Totaalbedrag opleidingsvergoedingsaanvraag<span class="gfield_required">
+                                <label class="gfield_label" for="input_totaalbedrag_subsidie_aanvraag">Totaalbedrag opleidingsvergoeding ex BTW<span class="gfield_required">
                                         <span class="gfield_required gfield_required_asterisk">*</span>
                                     </span>
                                 </label>
                                 <div class="ginput_container ginput_container_number">
-                                    <input name="totaalbedrag_subsidie_aanvraag" id="input_totaalbedrag_subsidie_aanvraag" type="text" value="" class="medium">
+                                    <input readonly name="totaalbedrag_subsidie_aanvraag" id="input_totaalbedrag_subsidie_aanvraag" type="text" value="" class="medium">
+                                </div>
+                            </div>
+                            <div id="field_uw_vergoeding_bedraagt" class="gfield gfield_contains_required   ">
+                                <label class="gfield_label" for="input_uw_vergoeding_bedraagt">Uw vergoeding bedraagt
+                                </label>
+                                <div class="ginput_container ginput_container_number">
+                                    <input name="uw_vergoeding_bedraagt" id="input_uw_vergoeding_bedraagt" type="text" value="" class="medium">
                                 </div>
                             </div>
                             <div id="field_totaalbedrag_subsidie_aanvraag" class="gfield gfield_contains_required   ">
@@ -309,7 +317,7 @@
 
         form.on('submit', function(event) {
             event.preventDefault();
-
+            jQuery('.error-input').removeClass('error-input');
             if ($('#gform_submit').val() == "{{__('Versturen')}}") {
                 var data = new FormData(this);
                 $.each($(':input', form), function(i, fileds) {
@@ -359,7 +367,7 @@
                     error: function(e) {
                         var html = '<div class="alert alert-danger">';
                         Object.keys(e.responseJSON.errors).forEach(function(i, v) {
-                            console.log(e.responseJSON.errors[i][0], v)
+                            jQuery('.ginput_container [name="'+i+'"]').addClass('error-input');
                             html += '<p>' + e.responseJSON.errors[i][0] + '</p>';
                         })
                         html += '</div>';
@@ -427,6 +435,9 @@
             $('#boxCourseMemberRequests').html(boxCourseMemberRequests)
         });
 
+        $('#input_course').change(function() {
+            console.log( $(this).val() );
+        });
         $('#input_deelnemers').change(function() {
             if ($(this).val() === "Minder dan 10") {
                 $('#boxCourseMemberRequests').show()
@@ -438,9 +449,12 @@
 
         $('#input_naam_cursus').change(function() {
             let inputValue = $(this).val();
-            let percentage = $(this).find('option:selected').attr('data-percentage');
+            let percentage = $(this).find('option[value="'+inputValue+'"]').attr('data-percentage');
+            let price = $(this).find('option[value="'+inputValue+'"]').attr('data-price');
+            console.log(percentage,price);
             if (percentage) {
                 $('#input_subsidiepercentage_dat_van_toepassing_is').val(percentage)
+                $('#input_totaalbedrag_subsidie_aanvraag').val(price)
             }
         });
         $('#input_naam_cursus').select2({

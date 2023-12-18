@@ -381,3 +381,22 @@ div#content {
 .btn-pdf {
     padding: 0 0 15px;
 }
+.gf-col-2.great-more {
+    width: 100%;
+}
+.error-input {
+    border-color: red !important;
+}
+#form_result {
+    width: 600px;
+}
+#form_result .alert-danger {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+div#boxCourseMemberRequestsTotal {
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+    font-weight: bold;
+}

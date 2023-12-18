@@ -41,18 +41,18 @@ class PostFormLoonsomopgaveRequest extends FormRequest
     public function messages()
     {
         return[
-            'naam_bedrijf.required' => 'Het veld naam_bedrijf is verplicht.',
-            'uw_naam.required' => 'Het veld uw_naam is verplicht.',
-            'telefoonnummer.required' => 'Het veld telefoonnummer is verplicht.',
-            'email.required' => 'Het veld email is verplicht.',
-            'email.email' => 'Het veld email bevat geen geldig e-mailadres.',
-            'reden.required' => 'Het veld reden is verplicht.',
-            'personeel_in_loondienst.required' => 'Het veld personeel_in_loondienst is verplicht.',
-            'loonsom.required' => 'Het veld loonsom is verplicht.',
-            'aantal_medewerkers.required' => 'Het veld aantal_medewerkers is verplicht.',
-            'personeel_datum.required' => 'Het veld personeel_datum is verplicht.',
-            'personeel_tot.required' => 'Het veld personeel_tot is verplicht.',
-            'verklaring.required' => 'Het veld verklaring is verplicht.'
+            'naam_bedrijf.required' => 'Het veld Naam bedrijf is verplicht.',
+            'uw_naam.required' => 'Het veld Uw naam is verplicht.',
+            'telefoonnummer.required' => 'Het veld Telefoonnummer is verplicht.',
+            'email.required' => 'Het veld E-mailadres is verplicht.',
+            'email.email' => 'Het veld E-mailadres bevat geen geldig e-mailadres.',
+            'reden.required' => 'Het veld Reden is verplicht.',
+            'personeel_in_loondienst.required' => 'Het veld Personeel in loondienst is verplicht.',
+            'loonsom.required' => 'Het veld Loonsom is verplicht.',
+            'aantal_medewerkers.required' => 'Het veld Aantal medewerkers is verplicht.',
+            'personeel_datum.required' => 'Het veld Personeel datum is verplicht.',
+            'personeel_tot.required' => 'Het veld Personeel tot is verplicht.',
+            'verklaring.required' => 'Het veld Verklaring is verplicht.'
         ];
     }
 }

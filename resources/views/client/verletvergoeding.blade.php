@@ -211,6 +211,8 @@
                                 </div>
                             </div>
                             <div id="boxCourseMemberRequests"></div>
+                            <hr>
+                            <div id="boxCourseMemberRequestsTotal" style="display:none;">U vraagt aan: <span>0</span> €</div>
                         </div>
 
                         <div class="gform_footer top_label">
@@ -226,7 +228,7 @@
     (function($) {
         "use strict";
         var form = $('#aanvraag_verletvergoeding');
-
+        var total_price = 0;
         form.on('submit', function(event) {
             event.preventDefault();
 
@@ -238,6 +240,8 @@
                 $.each($('input[type=file]', form)[0].files, function(i, file) {
                     data.append(file.name, file);
                 });
+
+                jQuery('.error-input').removeClass('error-input');
 
                 $.ajax({
                     url: "{{ route('create-contact-injury-compensation') }}",
@@ -278,7 +282,7 @@
                     error: function(e) {
                         var html = '<div class="alert alert-danger">';
                         Object.keys(e.responseJSON.errors).forEach(function(i, v) {
-                            console.log(e.responseJSON.errors[i][0], v)
+                            jQuery('.ginput_container [name="'+i+'"]').addClass('error-input');
                             html += '<p>' + e.responseJSON.errors[i][0] + '</p>';
                         })
                         html += '</div>';
@@ -338,14 +342,15 @@
                 </span>
             </label>
             <div class="ginput_container ginput_container_select">
-                <select required name="data_deelnemerslijst[${i}][hoogte_verletvergoeding]" class="medium gfield_select">
+                <select required name="data_deelnemerslijst[${i}][hoogte_verletvergoeding]" class="medium gfield_select hoogte_verletvergoeding_select">
                     @foreach($compensationAmounts as $compensationValue => $compensationName)
                     <option value="{{ $compensationValue }}">{{ $compensationName }}</option>
                     @endforeach
                 </select>
             </div>
         </div>`
-
+            var price = '<?= array_key_first($compensationAmounts);?>';
+            total_price += parseInt(price);
             return xmlCourseMemberRequests;
         }
 
@@ -358,19 +363,44 @@
                 }
             }
             $('#boxCourseMemberRequests').html(boxCourseMemberRequests)
+            $('#boxCourseMemberRequestsTotal span').text(total_price);
+            $('#boxCourseMemberRequestsTotal').show();
+        });
+        $('body').on('change','.hoogte_verletvergoeding_select',function() {
+            var change_price = 0;
+            $('.hoogte_verletvergoeding_select').each( function(key,val){
+                var cr_price =  $(val).val();
+                change_price += parseInt(cr_price);
+            });
+            $('#boxCourseMemberRequestsTotal span').text(change_price);
+            $('#boxCourseMemberRequestsTotal').show();
         });
 
-        let xmlEmployeeInput = `<div class="gfield gfield_contains_required ">
+        let xmlEmployeeInput = `<div class="gfield gf-col-2 gfield_contains_required   ">
         <label class="gfield_label" for="medewerker">Medewerker <span class="gfield_required">
                 <span class="gfield_required gfield_required_asterisk">*</span>
             </span>
         </label>
         <div class="ginput_container ginput_container_select">
-            <select required name="medewerker" id="medewerker" class="medium gfield_select">
+            <div class="ginput-col-3" id="input_10_5">
+                <span id="input_medewerker_first_name_container" class="ginput-col medewerker_first_name">
+                    <input required="" type="text" name="medewerker[first_name]" id="input_medewerker_first_name" value="" aria-required="true">
+                    <label for="input_medewerker_first_name" class="font-small">Voornaam</label>
+                </span>
+                <span id="input_medewerker_middle_name_container" class="ginput-col medewerker_middle_name">
+                    <input required="" type="text" name="medewerker[middle_name]" id="input_medewerker_middle_name" value="" aria-required="false">
+                    <label for="input_medewerker_middle_name" class="font-small">Tussenvoegsel</label>
+                </span>
+                <span id="input_medewerker_last_name_container" class="ginput-col medewerker_last_name">
+                    <input required="" type="text" name="medewerker[last_name]" id="input_medewerker_last_name" value="" aria-required="true">
+                    <label for="input_medewerker_last_name" class="font-small">Achternaam</label>
+                </span>
+            </div>
+            <!--select required name="medewerker" id="medewerker" class="medium gfield_select">
                 @foreach($employees as $employee)
                 <option value="{{ checkNameSelect($employee) }}">{{ checkNameSelect($employee) }}</option>
                 @endforeach
-            </select>
+            </select-->
         </div></div>`
         let packagePrice = 0
         $('#input_naam_cursus').change(function() {

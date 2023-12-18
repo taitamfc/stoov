@@ -29,7 +29,9 @@ class CourseController
 	public function getContactInjuryCompensation()
 	{
 		try {
-			$courses = Package::where('is_active', true)->get();
+			$courses = Package::where('is_active', true)
+			->where('price','>',0)
+			->get();
 			$compensationAmounts = config('course.compensation_amount');
 			$client = auth()->user()->client;
 			$employees = Employee::whereHas('companies', function ($q) use ($client) {
@@ -46,7 +48,9 @@ class CourseController
 	public function getContactTrainingGrant()
 	{
 		try {
-			$courses = Package::where('is_active', true)->get();
+			$courses = Package::where('is_active', true)
+			->where('price','>',0)
+			->get();
 			$client = auth()->user()->client;
 
 			return view('client.opleidingsvergoeding', compact('client', 'courses'));

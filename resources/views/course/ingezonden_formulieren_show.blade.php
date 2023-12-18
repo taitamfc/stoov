@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="text-center">
-                        <h2>{{ __('Detail') }}</h2>
+                        <h2>{{ __('Detail') }}111</h2>
                     </div>
                     <span id="form_result"></span>
                     <form method="post" id="basic_sample_form" class="form-horizontal" enctype="multipart/form-data"
@@ -96,6 +96,23 @@
                                             </div>
                                         </div>
                                     </div>
+                                @elseif($name === 'medewerker' && @$fields['medewerker'])
+                                    <div class="col-md-6 form-group">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <label class="text-bold">{{ __('Voornaam') }}</label>
+                                                <p>{{ @$fields['medewerker']['first_name'] }}</p>
+                                            </div>
+                                            <div class="col-4">
+                                                <label class="text-bold">{{ __('Tussenvoegsel') }}</label>
+                                                <p>{{ @$fields['medewerker']['middle_name'] }}</p>
+                                            </div>
+                                            <div class="col-4">
+                                                <label class="text-bold">{{ __('Achternaam') }}</label>
+                                                <p>{{ @$fields['medewerker']['last_name'] }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @elseif($name === 'first_name')
                                     <div class="col-md-6 form-group">
                                         <label class="text-bold">{{ __('Voornaam') }}</label>
@@ -166,7 +183,7 @@
                                 @endphp
                                 @foreach (@$fields[$filedNameArray] ?? [] as $arrayIndex => $arrayValue)
                                     <label
-                                        class="text-bold">{{ __(ucfirst(str_replace('_', ' ', $filedNameArray))) . ' ' . $arrayIndex }}
+                                        class="text-bold">{{ __(ucfirst(str_replace('_', ' ', $filedNameArray))) . ' ' . ($arrayIndex + 1) }}
                                     </label>
                                     <div class="row">
                                         @foreach ($arrayValue as $fieldArrayName => $fieldValue)

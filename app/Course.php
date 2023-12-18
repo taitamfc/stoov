@@ -19,7 +19,8 @@ class Course extends Model
         'is_watched',
         'company_id',
         'reden',
-        'boekjaar'
+        'boekjaar',
+        'uw_vergoeding_bedraagt'
     ];
 
     const TYPE_VERLETVERGOEDING = 1;
@@ -71,6 +72,7 @@ class Course extends Model
         'inzenddatum',
         'full_name',
         'naam_cursus',
+        'medewerker',
         'datum_cursus_van',
         'datum_tot',
         'deelnemersinfo_per_bestand',

@@ -38,6 +38,14 @@ class CompanyController extends Controller {
 				{
 					return @$data->details === 'No STOOV' ? 'N' : 'Y';
 				})
+				->addColumn('email_contact', function ($data)
+				{
+					return @$data->client->email ?? '';
+				})
+				->addColumn('email_receipt', function ($data)
+				{
+					return @$data->client->email_receipt ?? '';
+				})
 				->addColumn('action', function ($data)
 				{
 					$button = '<button type="button" name="show" id="' . $data->id . '" class="show_new btn btn-success btn-sm"><i class="dripicons-preview"></i></button>';
@@ -135,6 +143,8 @@ class CompanyController extends Controller {
 		if (request()->ajax())
 		{
 			$data = Company::findOrFail($id);
+			$data->email_contact = $data->client->email;
+			$data->email_receipt = $data->client->email_receipt;
 
 			return response()->json(['data' => $data]);
 		}
