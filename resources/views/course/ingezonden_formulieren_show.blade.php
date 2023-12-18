@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="text-center">
-                        <h2>{{ __('Detail') }}111</h2>
+                        <h2>{{ __('Detail') }}</h2>
                     </div>
                     <span id="form_result"></span>
                     <form method="post" id="basic_sample_form" class="form-horizontal" enctype="multipart/form-data"

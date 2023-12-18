@@ -27,6 +27,7 @@
                         <th scope="col">{{ __('Vakbondsbijdr') }}</th>
                         <th scope="col">{{ __('Opleidingsbudget') }}</th>
                         <th scope="col">{{ __('Total budget') }}</th>
+                        <th scope="col">{{ __('Remaining budget') }}</th>
                         <th scope="col">{{ __('action') }}</th>
                     </tr>
                 </thead>
@@ -146,6 +147,10 @@
                         {
                             data: 'amount',
                             name: 'amount'
+                        },
+                        {
+                            data: 'remainingBudget',
+                            name: 'remainingBudget'
                         },
                         {
                             data: 'action',

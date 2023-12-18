@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Budget;
 use App\Client;
 use App\Company;
+use App\Services\CourseService;
 use App\Imports\BudgettenImporteren;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Exception;
 use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\App;
 
 class AdminBudgetController extends Controller
 {
@@ -201,7 +203,6 @@ class AdminBudgetController extends Controller
 		$clients = Client::when(isset($companyId), function ($q) use ($userId) {
 				$q->whereId($userId);
 			})->get();
-
 		$budgetsList = $clients->map(function ($client) use ($budgets, $request) {
 			$defaultValue = getNumberFormat(0);
 			$budget = collect($budgets)->where('relatienummer', $client->relatienummer)->first();
@@ -219,7 +220,9 @@ class AdminBudgetController extends Controller
 			$budget['year'] = @$budget->year ?? $request->year;
 			$budget['budget_jaartal'] = @$budget->budget_jaartal ?? $request->year;
 			$budget['medewerkers_aantal'] = @$budget->medewerkers_aantal ?? 0;
-			
+			$companyId = @$budget->company_id;
+			$remainingBudget = App::make(CourseService::class)->getRemainingBudget($companyId);
+			$budget['remainingBudget'] = @$remainingBudget ? getNumberFormat($remainingBudget) : 0;
 			return $budget;
 		});
 

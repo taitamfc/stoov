@@ -145,6 +145,7 @@ class CompanyController extends Controller {
 			$data = Company::findOrFail($id);
 			$data->email_contact = $data->client->email;
 			$data->email_receipt = $data->client->email_receipt;
+			$data->nummer_certificaat = $data->client->nummer_certificaat;
 
 			return response()->json(['data' => $data]);
 		}

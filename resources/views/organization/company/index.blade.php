@@ -133,6 +133,12 @@
                                 <input type="text" name="email_receipt" id="email_receipt_input" class="form-control"
                                     placeholder={{ __('E-mailadres administratie') }}>
                             </div>
+                            
+                            <div class="col-md-6 form-group">
+                                <label>{{ __('Nummer certificaat') }}</label>
+                                <input type="text" name="nummer_certificaat" id="nummer_certificaat_input" class="form-control"
+                                    placeholder={{ __('Nummer certificaat') }}>
+                            </div>
 
                             <div class="col-md-12 form-group" align="center">
                                 <input type="hidden" name="action" id="action" />
@@ -560,6 +566,7 @@
                                 $('#emailadres').val(response.data.emailadres);
                                 $('#email_receipt_input').val(response.data.email_receipt);
                                 $('#email_contact_input').val(response.data.email_contact);
+                                $('#nummer_certificaat_input').val(response.data.nummer_certificaat);
                                 if (response.data.keurmerk == 1) {
                                     $('#keurmerk_yes').prop('checked', true);
                                 } else {
@@ -604,6 +611,7 @@
                         $('#emailadres').val(html.data.emailadres);
                         $('#email_receipt_input').val(html.data.email_receipt);
                         $('#email_contact_input').val(html.data.email_contact);
+                        $('#nummer_certificaat_input').val(html.data.nummer_certificaat);
                         $('#keurmerk').val(html.data.keurmerk);
 
                         $('#hidden_id').val(html.data.id);

@@ -93,6 +93,7 @@
                                     </label>
                                     <div class="ginput_container ginput_container_select ">
                                         <select name="naam_cursus" id="input_naam_cursus" class="medium gfield_select">
+                                            <option value=""></option>
                                             @foreach ($courses as $index => $course)
                                             <option 
                                                 value="{{ $course->id }}" 
@@ -461,8 +462,9 @@
             let inputValue = $(this).val();
             let percentage = $(this).find('option[value="'+inputValue+'"]').attr('data-percentage');
             let price = $(this).find('option[value="'+inputValue+'"]').attr('data-price');
-            console.log(percentage,price);
-            if (percentage) {
+            if (percentage || price) {
+                // percentage = parseFloat(percentage).toFixed(2);
+                price = parseFloat(price).toFixed(2);
                 $('#input_subsidiepercentage_dat_van_toepassing_is').val(percentage)
                 $('#input_totaalbedrag_subsidie_aanvraag').val(price)
             }
