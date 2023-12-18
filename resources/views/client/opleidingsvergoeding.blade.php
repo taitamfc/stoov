@@ -436,7 +436,17 @@
         });
 
         $('#input_course').change(function() {
-            console.log( $(this).val() );
+            let input_course = $(this).val();
+            if(input_course == 'Ja'){
+                $('#field_naam_cursus').show();
+                $('#input_subsidiepercentage_dat_van_toepassing_is').prop('readonly',true).val('');
+                $('#input_totaalbedrag_subsidie_aanvraag').prop('readonly',true).val('');
+            }else{
+                $('#input_naam_cursus').val('');
+                $('#field_naam_cursus').hide();
+                $('#input_subsidiepercentage_dat_van_toepassing_is').prop('readonly',false).val('');
+                $('#input_totaalbedrag_subsidie_aanvraag').prop('readonly',false).val('');
+            }
         });
         $('#input_deelnemers').change(function() {
             if ($(this).val() === "Minder dan 10") {
