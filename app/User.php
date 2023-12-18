@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Notifications\PasswordReset;
 
 class User extends Authenticatable
 {
@@ -112,6 +113,11 @@ class User extends Authenticatable
     public function client(){
 		return $this->hasOne(Client::class, 'id', 'id');
 	}
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new PasswordReset($token));
+    }
 }
 
 
