@@ -26,8 +26,8 @@ width: 100% !important;
 <table class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
 <tr>
 <td align="center">
+<img width="300px" align="center" src="https://stoov.hutspotdigital.nl/images/logo/logo.png" alt="">
 <table class="content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
-{{ $header ?? '' }}
 
 <!-- Email Body -->
 <tr>
