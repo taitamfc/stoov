@@ -221,7 +221,7 @@ class AdminBudgetController extends Controller
 			$budget['budget_jaartal'] = @$budget->budget_jaartal ?? $request->year;
 			$budget['medewerkers_aantal'] = @$budget->medewerkers_aantal ?? 0;
 			$companyId = @$client->company_id;
-			$remainingBudget = App::make(CourseService::class)->getRemainingBudget($companyId);
+			$remainingBudget = App::make(CourseService::class)->getRemainingBudget($companyId,$request->year);
 			$budget['remainingBudget'] = @$remainingBudget ? getNumberFormat($remainingBudget) : 0;
 			return $budget;
 		});

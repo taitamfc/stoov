@@ -309,13 +309,16 @@ class CourseService
      * 
      * @return float
      */
-    public function getRemainingBudget($companyId)
+    public function getRemainingBudget($companyId,$year = 0)
     {
-        $amountBudget = @Budget::whereBudgetJaartal(now()->year)
+        if(!$year){
+            $year = now()->year;
+        }
+        $amountBudget = @Budget::whereBudgetJaartal($year)
             ->whereCompanyId($companyId)
             ->first()->amount ?? 0;
         $amountCourse = @Course::whereCompanyId($companyId)
-            ->whereYear('created_at', now()->year)
+            ->whereYear('created_at', $year)
             ->whereIsApproved(Course::IS_APPROVED_YES)
             ->sum('amount_request') ?? 0;
 

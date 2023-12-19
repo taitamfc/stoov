@@ -3,9 +3,9 @@
     <section>
         <div class="table-responsive">
             <div class="year-filter">
-                <label class="year-filter-label">{{ __('Bedrijf') }}</label>
+                <label class="year-filter-label">{{ __('Jaar') }}</label>
                 <select name="year" id="year" required class="form-control">
-                    @foreach (range(2022, 2030) as $year)
+                    @foreach (range(2022, 2024) as $year)
                         <option value="{{ $year }}" @if($year === now()->year) selected @endif>{{ $year }}</option>
                     @endforeach
                 </select>
