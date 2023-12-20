@@ -80,6 +80,9 @@ class AdminCourseController extends Controller
 				->addColumn('email', function ($data) {
 					return $data->email;
 				})
+				->addColumn('relatienummer', function ($data) {
+					return $data->user->relatienummer;
+				})
 				->addColumn('created_at', function ($data) {
 					return formatDate($data->created_at);
 				})
@@ -293,7 +296,9 @@ class AdminCourseController extends Controller
 		$user = @User::whereId($course->user_id)->first();
 		if ($course) $course->update(['is_watched' => true]);
 		$fields = $course ? json_decode($course->content, true) : [];
-		$courses = @Package::where('is_active', true)->get();
+		$courses = @Package::where('is_active', true)
+		->where('price','>',0)
+		->get();
 		$compensationAmounts = config('course.compensation_amount');
 		$employees = @Employee::whereHas('companies', function ($q) use ($user) {
 			$q->whereId($user->company_id);

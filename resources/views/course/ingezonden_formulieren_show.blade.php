@@ -180,10 +180,12 @@
                             <div class="col-12">
                                 @php
                                     $filedNameArray = 'data_deelnemerslijst';
+                                    $key = 1;
                                 @endphp
                                 @foreach (@$fields[$filedNameArray] ?? [] as $arrayIndex => $arrayValue)
+                                    
                                     <label
-                                        class="text-bold">{{ __(ucfirst(str_replace('_', ' ', $filedNameArray))) . ' ' . ($arrayIndex + 1) }}
+                                        class="text-bold">{{ __(ucfirst(str_replace('_', ' ', $filedNameArray))) . ' ' . ($key) }}
                                     </label>
                                     <div class="row">
                                         @foreach ($arrayValue as $fieldArrayName => $fieldValue)
@@ -194,6 +196,9 @@
                                             </div>
                                         @endforeach
                                     </div>
+                                    @php
+                                    $key++;
+                                    @endphp
                                 @endforeach
                             </div>
                         </div>

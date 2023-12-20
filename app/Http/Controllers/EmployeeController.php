@@ -210,7 +210,7 @@ class EmployeeController extends Controller
 	}
 
 	public function show(Employee $employee)
-	{
+	{	
 		$companies = Company::select('id', 'organisatie')->get();
 		$departments = department::select('id', 'department_name')
 			->where('company_id', $employee->company_id)
