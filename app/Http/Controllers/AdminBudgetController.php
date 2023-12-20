@@ -214,6 +214,7 @@ class AdminBudgetController extends Controller
 			$budget['opleidingsbudget'] = @$budget['opleidingsbudget'] ? getNumberFormat($budget['opleidingsbudget']) : $defaultValue;
 			$budget['datum_opgave'] = @$budget['datum_opgave'] ? formatDate($budget['datum_opgave']) : null;
 			$budget['loonsom_opgegeven'] = @$budget['opleidingsbudget'] === 1 ? 'Y' : 'N';
+			$budget['loonsom_opgegeven'] = 'Y';
 			$budget['bedrijf'] = @$client->company->organisatie;
 			$budget['id'] = @$budget['id'] ?? - 1;
 			$budget['relatienummer'] = @$client->relatienummer ?? null;

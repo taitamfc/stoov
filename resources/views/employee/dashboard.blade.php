@@ -211,7 +211,7 @@
                                 </div>
                             </div>
                             <div class="card">
-                                <div class="card-header" id="headingOne">
+                                <div class="card-header" id="headingOne" style="background: #31a836;">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link" data-toggle="collapse" data-target="" aria-expanded="true" aria-controls="collapseOne">VCA</button>
                                     </h5>
@@ -220,11 +220,15 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-6"><strong>Datum Uitgifte VCA</strong></div>
-                                            <div class="col-md-6">{{ @$certifications[0]['datum_uitgifte_vca']}}</div>
+                                            <div class="col-md-6">{{ @date('d-m-Y',strtotime($certifications[0]['datum_uitgifte_vca']))}}</div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6"> <strong>Vervaldatum VCA</strong></div>
-                                            <div class="col-md-6">{{ @$certifications[0]['vervaldatum_vca']}}</div>
+                                            <div class="col-md-6">{{ @date('d-m-Y',strtotime($certifications[0]['vervaldatum_vca']))}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6"> <strong>Certificaatnummer</strong></div>
+                                            <div class="col-md-6">{{ $certifications[0]['certificaatnummer'] }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -281,11 +285,11 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6"><strong>Datum gecertificeerd Glaszetter </strong></div>
-                                            <div class="col-md-6">{{@$certifications[0]['datum_gecertificeerd_glaszetter']}}</div>
+                                            <div class="col-md-6">{{@date('d-m-Y',strtotime($certifications[0]['datum_gecertificeerd_glaszetter']))}}</div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6"><strong>Vervaldatum certificering Glaszetter</strong></div>
-                                            <div class="col-md-6">{{@$certifications[0]['vervaldatum_gecertificeerd_glaszetter']}}</div>
+                                            <div class="col-md-6">{{@date('d-m-Y',strtotime($certifications[0]['vervaldatum_gecertificeerd_glaszetter']))}}</div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">

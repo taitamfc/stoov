@@ -4,7 +4,7 @@
     <div class="container-fluid"><span id="general_result"></span></div>
     <div class="container-fluid mb-3">
         @can('store-details-employee')
-        <button type="button" class="btn btn-info" name="create_record" id="create_record"><i class="fa fa-plus"></i> {{__('Add Employee')}}</button>
+        <button type="button" class="btn btn-info" name="create_record" id="create_record"><i class="fa fa-plus"></i> {{__('Medewerker toevoegen')}}</button>
         @endcan
         @can('modify-details-employee')
         <button type="button" class="btn btn-danger" name="bulk_delete" id="bulk_delete"><i class="fa fa-minus-circle"></i> {{__('Bulk delete')}}</button>
@@ -70,9 +70,9 @@
                     <th>{{ __('Indienst Sinds') }}</th>
                     <th>{{ __('Is Onderaannemer') }}</th>
                     <th>{{ __('Onderaannemer Sinds') }}</th>
-                    <th>{{ __('Vevaldatum VCA') }}</th>
+                    <!-- <th>{{ __('Vevaldatum VCA') }}</th>
                     <th>{{ __('Vervaldatum Glasmonteur') }}</th>
-                    <th>{{ __('Vervaldatum Glaszetter') }}</th>
+                    <th>{{ __('Vervaldatum Glaszetter') }}</th> -->
                     <th class="not-exported">{{__('action')}}</th>
                 </tr>
             </thead>
@@ -384,6 +384,7 @@
                     data: 'onderaannemer_sinds',
                     name: 'onderaannemer_sinds',
                 },
+                /*
                 {
                     data: 'vevaldatum_vca',
                     name: 'vevaldatum_vca',
@@ -395,7 +396,7 @@
                 {
                     data: 'vervaldatum_glaszetter',
                     name: 'vervaldatum_glaszetter',
-                },
+                },*/
                 {
                     data: 'action',
                     name: 'action',
