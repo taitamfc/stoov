@@ -645,6 +645,7 @@ class EmployeeController extends Controller
 		$certification = Certification::find($id);
 		$pdf = PDF::loadView('employee.pdf.glaszetten', ['employee' => $certification->employee, 'certification' => $certification->toArray()]);
 		// return view('employee.pdf.glaszetten', ['employee' => $certification->employee, 'certification' => $certification->toArray()]);
+		return $pdf->stream(__('GLASZETTEN') . ".pdf");
 		return $pdf->download(__('GLASZETTEN') . ".pdf");
 	}
 

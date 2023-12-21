@@ -330,11 +330,11 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6"><strong>Vervaldatum hercertificering glasmonteur </strong></div>
-                                            <div class="col-md-6">{{@date('d-m-Y',strtotime($certifications[0]['vervaldatum_hercertificering_glasmonteur']))}}</div>
+                                            <div class="col-md-6">{{$certifications[0]['vervaldatum_hercertificering_glasmonteur'] ? @date('d-m-Y',strtotime($certifications[0]['vervaldatum_hercertificering_glasmonteur'])) : ''}}</div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6"><strong>Hercertificeringscode glasmonteur</strong></div>
-                                            <div class="col-md-6">{{@date('d-m-Y',strtotime($certifications[0]['hercertificeringscode_glasmonteur']))}}</div>
+                                            <div class="col-md-6">{{$certifications[0]['hercertificeringscode_glasmonteur'] ? @date('d-m-Y',strtotime($certifications[0]['hercertificeringscode_glasmonteur'])) : ''}}</div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
@@ -457,11 +457,11 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6"><strong>Vervaldatum hercertificering glaszetter </strong></div>
-                                            <div class="col-md-6">{{@date('d-m-Y',strtotime($certifications[0]['vervaldatum_hercertificering_glaszetter']))}}</div>
+                                            <div class="col-md-6">{{$certifications[0]['vervaldatum_hercertificering_glaszetter'] ? @date('d-m-Y',strtotime($certifications[0]['vervaldatum_hercertificering_glaszetter'])) : ''}}</div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6"><strong>Hercertificeringscode glaszetter</strong></div>
-                                            <div class="col-md-6">{{@date('d-m-Y',strtotime($certifications[0]['hercertificeringscode_glaszetter']))}}</div>
+                                            <div class="col-md-6">{{$certifications[0]['hercertificeringscode_glaszetter'] ? @date('d-m-Y',strtotime($certifications[0]['hercertificeringscode_glaszetter'])) : ''}}</div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">

@@ -134,6 +134,14 @@ class CompanyController extends Controller {
 			$data = Company::findOrFail($id)->load('client');
 			$data['keurmerk'] = @$data->keurmerk == 1 ? 'Y' : 'N';
 			$data['stoov_klant'] = @$data->details ? 'Y' : 'N';
+			$data->email_contact = $data->client->email;
+			$data->emailadres 	= $data->emailadres ? $data->emailadres : $data->email_contact;
+			$data->email_receipt = $data->client->email_receipt;
+			$data->nummer_certificaat = $data->client->nummer_certificaat;
+			$data->telefoonnummer 	= $data->telefoonnummer ? $data->telefoonnummer : $data->client->contact_no;
+			$data->post_code 	= $data->post_code ? $data->post_code : $data->client->zip;
+			$data->straat 	= $data->straat ? $data->straat : $data->client->address2;
+			$data->number 	= $data->number ? $data->number : $data->client->address1;
 
 			return response()->json(['data' => $data]);
 		}
@@ -152,6 +160,7 @@ class CompanyController extends Controller {
 		{
 			$data = Company::findOrFail($id);
 			$data->email_contact = $data->client->email;
+			$data->emailadres 	= $data->emailadres ? $data->emailadres : $data->email_contact;
 			$data->email_receipt = $data->client->email_receipt;
 			$data->nummer_certificaat = $data->client->nummer_certificaat;
 

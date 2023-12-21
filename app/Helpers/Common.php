@@ -137,11 +137,11 @@ if (! function_exists('checkSubmitLoomsom')) {
     function checkSubmitLoomsom()
 	{
         $user = auth()->user();
-
-		return Course::whereUserId($user->id)
+		$check = Course::where('user_id',$user->id)
 			->whereType(Course::TYPE_LOONSOMOPGAVE)
 			->whereYear('created_at', now()->year)
 			->exists();
+        return $check;
 	}
 }
 

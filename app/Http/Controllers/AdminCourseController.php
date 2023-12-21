@@ -119,7 +119,7 @@ class AdminCourseController extends Controller
 					$user = auth()->user();
 					$button = '';
 					$button .= '<a href="' . route('course.show', ['id' => $data->id]) . '"  class="edit btn btn-info btn-sm"><i class="dripicons-preview"></i></button></a> ';
-					if( $user->role_users_id != User::CLIENT ){
+					if( @$user->role_users_id != User::CLIENT ){
 						$button .= '<a href="' . route('course.edit', ['id' => $data->id]) . '"  class="edit btn btn-primary btn-sm"><i class="dripicons-document-edit"></i></button></a>';
 					}
 					return $button;

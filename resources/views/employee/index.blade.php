@@ -100,7 +100,7 @@
 
                     @csrf
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label class="text-bold">{{__('Berdrijf')}} <span class="text-danger">*</span></label>
                                 <select name="company_ids[]" multiple id="company_id" required class="form-control selectpicker dynamic" data-live-search="true" data-live-search-style="contains" data-shift_name="shift_name" data-dependent="department_name" title="{{__('Selecting',['key'=>__('Berdrijf')])}}...">
@@ -110,15 +110,15 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-4 form-group">
                             <label class="text-bold">{{__('Initialen')}} <span class="text-danger">*</span></label>
                             <input type="text" name="initialen" id="initialen" placeholder="{{__('Initialen')}}" required class="form-control">
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-4 form-group">
                             <label class="text-bold">{{__('Tussenvoegsel')}} <span class="text-danger">*</span></label>
                             <input type="text" name="tussenvoegsel" id="tussenvoegsel" placeholder="{{__('Tussenvoegsel')}}" required class="form-control">
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-4 form-group">
                             <label class="text-bold">{{__('Achternaam')}} <span class="text-danger">*</span></label>
                             <input type="text" name="achternaam" id="achternaam" placeholder="{{__('Achternaam')}}" required class="form-control">
                         </div>
@@ -136,41 +136,50 @@
                             <input type="text" name="geboorteplaats" id="geboorteplaats" placeholder="{{__('Geboorteplaats')}}" required class="form-control">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label class="text-bold">{{__('Aktief')}} <span class="text-danger">*</span></label>
-                            <label class="radio-inline">
-                                <input type="radio" name="aktief" value="0">{{__('No')}}
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="aktief" value="1" checked>{{__('Yes')}}
-                            </label>
-                        </div>
-                        <div class="col-md-6 form-group">
                             <label class="text-bold">{{__('Indienst Sinds')}} <span class="text-danger">*</span></label>
                             <input type="text" name="indienst_sinds" id="indienst_sinds" required autocomplete="off" class="form-control date" value="">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label class="text-bold">{{__('In Dienst')}} <span class="text-danger">*</span></label>
-                            <label class="radio-inline">
-                                <input type="radio" name="in_dienst" value="0">{{__('No')}}
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="in_dienst" value="1" checked>{{__('Yes')}}
-                            </label>
-                        </div>
-                        
-                        <div class="col-md-6 form-group">
-                            <label class="text-bold">{{__('Is Onderaannemer')}} <span class="text-danger">*</span></label>
-                            <label class="radio-inline">
-                                <input type="radio" name="is_onderaannemer" value="0">{{__('No')}}
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="is_onderaannemer" value="1" checked>{{__('Yes')}}
-                            </label>
                         </div>
                         <div class="col-md-6 form-group">
                             <label class="text-bold">{{__('Onderaannemer Sinds')}} <span class="text-danger">*</span></label>
                             <input type="text" name="onderaannemer_sinds" id="onderaannemer_sinds" required autocomplete="off" class="form-control date" value="">
                         </div>
+                        <div class="col-md-4 form-group">
+                            <label class="text-bold">{{__('Aktief')}} <span class="text-danger">*</span></label>
+                            <div>
+                                <label class="radio-inline">
+                                    <input type="radio" name="aktief" value="0">{{__('No')}}
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="aktief" value="1" checked>{{__('Yes')}}
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 form-group">
+                            <label class="text-bold">{{__('In Dienst')}} <span class="text-danger">*</span></label>
+                            <div>
+                                <label class="radio-inline">
+                                    <input type="radio" name="in_dienst" value="0">{{__('No')}}
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="in_dienst" value="1" checked>{{__('Yes')}}
+                                </label>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="col-md-4 form-group">
+                            <label class="text-bold">{{__('Is Onderaannemer')}} <span class="text-danger">*</span></label>
+                            <div>
+                                <label class="radio-inline">
+                                    <input type="radio" name="is_onderaannemer" value="0">{{__('No')}}
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="is_onderaannemer" value="1" checked>{{__('Yes')}}
+                                </label>
+                            </div>
+                        </div>
+                       
                         <!-- <div class="col-md-6 form-group">
                             <label class="text-bold">{{__('Vevaldatum VCA')}} <span class="text-danger">*</span></label>
                             <input type="text" name="vevaldatum_vca" id="vevaldatum_vca" required autocomplete="off" class="form-control date" value="">

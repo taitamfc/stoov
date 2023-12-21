@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'FFGoodPro';
+    src: url('../fonts/FFGoodPro-Regular.woff2') format('woff2'),
+         url('../fonts/FFGoodPro-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FFGoodPro';
+    src: url('../fonts/FFGoodPro-Medium.woff2') format('woff2'),
+         url('../fonts/FFGoodPro-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+  }

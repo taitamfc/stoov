@@ -30,7 +30,7 @@
 
 
     :root {
-        --font-color: #0d2d6c;
+        --font-color: #0C459C;
         /* --highlight-color: #60D0E4;
         --header-bg-color: #B8E6F1;
         --footer-bg-color: #BFC0C3;
@@ -42,7 +42,7 @@
         /* padding: 2.5cm 2cm 5.5cm; */
         color: var(--font-color);
         font-family: 'Good Pro', sans-serif;
-        font-size: 18px;
+        font-size: 17px;
         width: 100%;
         height: 842;
         position: relative;
@@ -56,7 +56,7 @@
     }
 
     h1 {
-        font-family: 'Gotham', sans-serif;
+        font-family: 'Gotham-Bold', sans-serif;
         font-weight: bold;
         font-size: 50px;
         margin-top: 80px;
@@ -65,7 +65,7 @@
     }
 
     h2 {
-        font-size: 20px;
+        font-size: 35px;
         text-align: center;
     }
 
@@ -79,9 +79,9 @@
     }
 
     .fz-35 {
-        font-size: 35px;
+        font-size: 16pt;
         text-align: center;
-        font-family: 'Gotham', sans-serif;
+        font-family: 'GoodPro-Medium', sans-serif;
         font-weight: bold;
         margin-top: 0px;
         padding-top: 0px;
@@ -90,7 +90,7 @@
 
     table td {
         padding: 20px 10px 0 0;
-        color: #000;
+        color: #0C459C;
     }
 
     table td:first-child {
@@ -100,13 +100,13 @@
     table td:last-child {
         width: 300px;
         text-align: right;
-        border-bottom: 1px solid #000;
+        border-bottom: 1px solid #0C459C;
     }
 
     table.table-custom td:last-child {
         width: 500px;
         text-align: left;
-        border-bottom: 1px solid #000;
+        border-bottom: 1px solid #0C459C;
     }
 
     table.table-custom td.td-label {
