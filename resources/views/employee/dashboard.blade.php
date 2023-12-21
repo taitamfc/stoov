@@ -233,7 +233,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
+                            <!-- <div class="card">
                                 <div class="card-header" id="headingOne" style="background: #31a836;">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link" data-toggle="collapse" data-target="" aria-expanded="true" aria-controls="collapseOne">Certificaat</button>
@@ -251,7 +251,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="card">
                                 <div class="card-header" id="headingOne">
                                     <h5 class="mb-0">

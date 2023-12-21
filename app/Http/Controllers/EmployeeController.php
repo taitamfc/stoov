@@ -167,9 +167,11 @@ class EmployeeController extends Controller
 						'indienst_sinds' => $rule,
 						'is_onderaannemer' => $rule,
 						'onderaannemer_sinds' => $rule,
-						'vevaldatum_vca' => $rule,
-						'vervaldatum_glasmonteur' => $rule,
-						'vervaldatum_glaszetter' => $rule,
+						//'vevaldatum_vca' => $rule,
+						//'vervaldatum_glasmonteur' => $rule,
+						//'vervaldatum_glaszetter' => $rule,
+					],[
+						'required' => 'Het veld :attribute is verplicht.'
 					]
 				);
 

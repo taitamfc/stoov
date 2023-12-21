@@ -10,6 +10,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-9 col-md-10 mb-3">
+                <h1 class="tex-center">Welkom op de portal van STOOV.</h1>
                 <h4 class="font-weight-bold">{{$client->first_name}} {{$client->last_name}} <span class="text-muted">({{$user->username}})</span>
                 </h4>
                 <!-- <div class="text-muted mb-2">{{__('Berdrijf')}}: {{$client->company_name}}</div> -->

@@ -111,22 +111,22 @@
                             </div>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label class="text-bold">{{__('Achternaam')}} <span class="text-danger">*</span></label>
-                            <input type="text" name="achternaam" id="achternaam" placeholder="{{__('Achternaam')}}" required class="form-control">
-                        </div>
-                        <div class="col-md-6 form-group">
                             <label class="text-bold">{{__('Initialen')}} <span class="text-danger">*</span></label>
                             <input type="text" name="initialen" id="initialen" placeholder="{{__('Initialen')}}" required class="form-control">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label class="text-bold">{{__('Toevoeging')}} <span class="text-danger">*</span></label>
-                            <input type="text" name="toevoeging" id="toevoeging" placeholder="{{__('Toevoeging')}}" required class="form-control">
-                        </div>
-
-                        <div class="col-md-6 form-group">
                             <label class="text-bold">{{__('Tussenvoegsel')}} <span class="text-danger">*</span></label>
                             <input type="text" name="tussenvoegsel" id="tussenvoegsel" placeholder="{{__('Tussenvoegsel')}}" required class="form-control">
                         </div>
+                        <div class="col-md-6 form-group">
+                            <label class="text-bold">{{__('Achternaam')}} <span class="text-danger">*</span></label>
+                            <input type="text" name="achternaam" id="achternaam" placeholder="{{__('Achternaam')}}" required class="form-control">
+                        </div>
+                        
+                        <!-- <div class="col-md-6 form-group">
+                            <label class="text-bold">{{__('Toevoeging')}} <span class="text-danger">*</span></label>
+                            <input type="text" name="toevoeging" id="toevoeging" placeholder="{{__('Toevoeging')}}" required class="form-control">
+                        </div> -->
                         <div class="col-md-6 form-group">
                             <label class="text-bold">{{__('Geboortedatum')}} <span class="text-danger">*</span></label>
                             <input type="text" name="geboortedatum" id="geboortedatum" required autocomplete="off" class="form-control date" value="">
@@ -145,6 +145,10 @@
                             </label>
                         </div>
                         <div class="col-md-6 form-group">
+                            <label class="text-bold">{{__('Indienst Sinds')}} <span class="text-danger">*</span></label>
+                            <input type="text" name="indienst_sinds" id="indienst_sinds" required autocomplete="off" class="form-control date" value="">
+                        </div>
+                        <div class="col-md-6 form-group">
                             <label class="text-bold">{{__('In Dienst')}} <span class="text-danger">*</span></label>
                             <label class="radio-inline">
                                 <input type="radio" name="in_dienst" value="0">{{__('No')}}
@@ -153,10 +157,7 @@
                                 <input type="radio" name="in_dienst" value="1" checked>{{__('Yes')}}
                             </label>
                         </div>
-                        <div class="col-md-6 form-group">
-                            <label class="text-bold">{{__('Indienst Sinds')}} <span class="text-danger">*</span></label>
-                            <input type="text" name="indienst_sinds" id="indienst_sinds" required autocomplete="off" class="form-control date" value="">
-                        </div>
+                        
                         <div class="col-md-6 form-group">
                             <label class="text-bold">{{__('Is Onderaannemer')}} <span class="text-danger">*</span></label>
                             <label class="radio-inline">
@@ -170,18 +171,18 @@
                             <label class="text-bold">{{__('Onderaannemer Sinds')}} <span class="text-danger">*</span></label>
                             <input type="text" name="onderaannemer_sinds" id="onderaannemer_sinds" required autocomplete="off" class="form-control date" value="">
                         </div>
-                        <div class="col-md-6 form-group">
+                        <!-- <div class="col-md-6 form-group">
                             <label class="text-bold">{{__('Vevaldatum VCA')}} <span class="text-danger">*</span></label>
                             <input type="text" name="vevaldatum_vca" id="vevaldatum_vca" required autocomplete="off" class="form-control date" value="">
-                        </div>
-                        <div class="col-md-6 form-group">
+                        </div> -->
+                        <!-- <div class="col-md-6 form-group">
                             <label class="text-bold">{{__('Vervaldatum Glasmonteur')}} <span class="text-danger">*</span></label>
                             <input type="text" name="vervaldatum_glasmonteur" id="vervaldatum_glasmonteur" required autocomplete="off" class="form-control date" value="">
-                        </div>
-                        <div class="col-md-6 form-group">
+                        </div> -->
+                        <!-- <div class="col-md-6 form-group">
                             <label class="text-bold">{{__('Vervaldatum Glaszetter')}} <span class="text-danger">*</span></label>
                             <input type="text" name="vervaldatum_glaszetter" id="vervaldatum_glaszetter" required autocomplete="off" class="form-control date" value="">
-                        </div>
+                        </div> -->
                         <div class="container">
                             <div class="form-group" align="center">
                                 <input type="hidden" name="action" id="action" />

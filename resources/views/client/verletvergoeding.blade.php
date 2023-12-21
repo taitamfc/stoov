@@ -212,7 +212,7 @@
                             </div>
                             <div id="boxCourseMemberRequests"></div>
                             <hr>
-                            <div id="boxCourseMemberRequestsTotal" style="display:none;">U vraagt aan: <span>0</span> €</div>
+                            <div id="boxCourseMemberRequestsTotal" style="display:none;">U vraagt aan: € <span>0</span></div>
                         </div>
 
                         <div class="gform_footer top_label">
@@ -294,6 +294,7 @@
 
 
         function getXmlCourseMemberRequests(i) {
+            var price = '<?= array_key_first($compensationAmounts);?>';
             let xmlCourseMemberRequests = `<div class="gf-col-2 great-more aantal_deelnemers_in_cursus gfield  gfield_contains_required">
             <label class="gfield_label gfield_label_before_complex">Naam werknemer <span class="gfield_required">
                     <span class="gfield_required gfield_required_asterisk">*</span>
@@ -338,18 +339,19 @@
         </div>
         <div id="field_hoogte_verletvergoeding_${i}" class="great-more aantal_deelnemers_in_cursus gfield gfield_contains_required">
             <label class="gfield_label" for="input_hoogte_verletvergoeding_${i}">Hoogte verletvergoeding <span class="gfield_required">
-                    <span class="gfield_required gfield_required_asterisk">*</span>
+                    : totaal € ${price}
                 </span>
+                <input type="hidden" class="hoogte_verletvergoeding_price" value="${price}">
             </label>
             <div class="ginput_container ginput_container_select">
-                <select required name="data_deelnemerslijst[${i}][hoogte_verletvergoeding]" class="medium gfield_select hoogte_verletvergoeding_select">
+                <!--select required name="data_deelnemerslijst[${i}][hoogte_verletvergoeding]" class="medium gfield_select hoogte_verletvergoeding_select">
                     @foreach($compensationAmounts as $compensationValue => $compensationName)
                     <option value="{{ $compensationValue }}">{{ $compensationName }}</option>
                     @endforeach
-                </select>
+                </select-->
             </div>
         </div>`
-            var price = '<?= array_key_first($compensationAmounts);?>';
+            
             total_price += parseInt(price);
             return xmlCourseMemberRequests;
         }
@@ -363,12 +365,18 @@
                 }
             }
             $('#boxCourseMemberRequests').html(boxCourseMemberRequests)
-            $('#boxCourseMemberRequestsTotal span').text(total_price);
+            
+            var change_price = 0;
+            $('.hoogte_verletvergoeding_price').each( function(key,val){
+                var cr_price =  $(val).val();
+                change_price += parseInt(cr_price);
+            });
+            $('#boxCourseMemberRequestsTotal span').text(change_price);
             $('#boxCourseMemberRequestsTotal').show();
         });
         $('body').on('change','.hoogte_verletvergoeding_select',function() {
             var change_price = 0;
-            $('.hoogte_verletvergoeding_select').each( function(key,val){
+            $('.hoogte_verletvergoeding_price').each( function(key,val){
                 var cr_price =  $(val).val();
                 change_price += parseInt(cr_price);
             });

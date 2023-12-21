@@ -49,7 +49,7 @@ class CourseController
 	{
 		try {
 			$courses = Package::where('is_active', true)
-			->where('price','>',0)
+			->where('percentage','>',0)
 			->get();
 			$client = auth()->user()->client;
 
