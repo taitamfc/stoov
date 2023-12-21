@@ -121,6 +121,17 @@
                                     <input type="radio" name="keurmerk" value="1" id="keurmerk_yes"> {{ __('Ja') }}
                                 </label>
                             </div>
+                            <div class="col-md-6 form-group">
+                                <label>{{ __('Stoov klant') }} </label>
+                                <br>
+                                <label class="radio-inline" for="keurmerk_no">
+                                    <input type="radio" name="details" value="No STOOV" checked id="details_no">
+                                    {{ __('Nee') }}
+                                </label>
+                                <label class="radio-inline" for="details_yes">
+                                    <input type="radio" name="details" value="1" id="details_yes"> {{ __('Ja') }}
+                                </label>
+                            </div>
 
                             <div class="col-md-6 form-group">
                                 <label>{{ __('E-mailadres contact') }}</label>

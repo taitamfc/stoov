@@ -252,6 +252,13 @@
                                     </div>
                                 </div>
                             </div> -->
+                            @if( $certifications[0]['gewenste_certificatie'] == 'Beide'
+                                || $certifications[0]['gewenste_certificatie'] == 'Glasmonteur'
+                            )
+
+                            <!--
+                                Glasmonteur: L M N.= text above table  for table = O, P and Q
+                            -->
                             <div class="card">
                                 <div class="card-header" id="headingOne">
                                     <h5 class="mb-0">
@@ -261,16 +268,110 @@
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-6"><strong>Hercertificering Glasmonteur </strong></div>
-                                            @if ( @$certifications[0]['hercertificering_glasmonteur'] === 0)
-                                            <div class="col-md-6"><input type="checkbox" name="" id=""></div>
-                                            @else
-                                            <div class="col-md-6"><input type="checkbox" checked name="" id=""></div>
-                                            @endif
+                                            <div class="col-md-6"><strong>Pasje gecertificeerd glasmonteur </strong></div>
+                                            <div class="col-md-6">{{@$certifications[0]['pasje_gecertificeerd_glasmonteur']}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6"><strong>Datum gecertificeerd glasmonteur</strong></div>
+                                            <div class="col-md-6">{{$certifications[0]['datum_gecertificeerd_glasmonteur'] ? @date('d-m-Y',strtotime($certifications[0]['datum_gecertificeerd_glasmonteur']))  : ''}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6"><strong>Vervaldatum certificering glasmonteur</strong></div>
+                                            <div class="col-md-6">{{$certifications[0]['vervaldatum_gecertificeerd_glasmonteur'] ? @date('d-m-Y',strtotime($certifications[0]['vervaldatum_gecertificeerd_glasmonteur'])) : ''}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <table>
+                                                    <caption>Examen Glasmonteur</caption>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Examen glasmonteur</th>
+                                                            <th>Examencode glasmonteur</th>
+                                                            <th>Examencijfer glasmonteur</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($certifications as $certification)
+                                                        <tr>
+                                                            <td>
+                                                                {{$certification['examen_glasmonteur']}}
+                                                            </td>
+                                                            <td>
+                                                                {{$certification['examencode_glasmonteur']}}
+                                                            </td>
+                                                            <td>
+                                                                {{@$certification['examencijfer_glasmonteur']}}
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            @endif
+
+                            @if( $certifications[0]['hercertificering_glasmonteur'] )
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="" aria-expanded="true" aria-controls="collapseOne">Hercertificering glasmonteur</button>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6"><strong>Datum hercertificering glasmonteur</strong></div>
+                                            <div class="col-md-6">{{@$certifications[0]['datum_hercertificering_glasmonteur']}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6"><strong>Vervaldatum hercertificering glasmonteur </strong></div>
+                                            <div class="col-md-6">{{@date('d-m-Y',strtotime($certifications[0]['vervaldatum_hercertificering_glasmonteur']))}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6"><strong>Hercertificeringscode glasmonteur</strong></div>
+                                            <div class="col-md-6">{{@date('d-m-Y',strtotime($certifications[0]['hercertificeringscode_glasmonteur']))}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Hercertificeringscode glasmonteur</th>
+                                                            <th>Hercertificeringscijfer glasmonteur</th>
+                                                            <th>Hercertificeringspasnummer glasmonteur</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($certifications as $certification)
+                                                        <tr>
+                                                            <td>
+                                                                {{$certification['hercertificeringscode_glasmonteur']}}
+                                                            </td>
+                                                            <td>
+                                                                {{$certification['hercertificeringscijfer_glasmonteur']}}
+                                                            </td>
+                                                            <td>
+                                                                {{$certification['hercertificeringspasnummer_glasmonteur']}}
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if( $certifications[0]['gewenste_certificatie'] == 'Beide'
+                                || $certifications[0]['gewenste_certificatie'] == 'Glaszetter'
+                            )
                             <div class="card">
                                 <div class="card-header" id="headingOne">
                                     <h5 class="mb-0">
@@ -306,10 +407,10 @@
                                                         @foreach ($certifications as $certification)
                                                         <tr>
                                                             <td>
-                                                                {{$certification['examen_glasmonteur']}}
+                                                                {{$certification['examen_glaszetter']}}
                                                             </td>
                                                             <td>
-                                                                {{$certification['examencode_glasmonteur']}}
+                                                                {{$certification['examencode_glaszetter']}}
                                                             </td>
                                                             <td>
                                                                 {{$certification['examencijfer_glaszetter']}}
@@ -320,26 +421,80 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <!-- <div class="row">
                                             <div class="col-md-6"><strong>Hercertificering Glaszetter </strong></div>
                                             @if ( @$certifications[0]['hercertificering_glaszetter'] === 0)
                                             <div class="col-md-6"><input type="checkbox" name="" id=""></div>
                                             @else
                                             <div class="col-md-6"><input type="checkbox" checked name="" id=""></div>
                                             @endif
-                                        </div>
-                                        <div class="row">
+                                        </div> -->
+                                        <!-- <div class="row">
                                             <div class="col-md-6"><strong>CertificaatMedewerkerInitialen</strong></div>
                                             <div class="col-md-6">{{ $employee->initialen }}</div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6"><strong>CertificaatMedewerkerAchternaam</strong></div>
                                             <div class="col-md-6">{{ $employee->achternaam }}</div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if( $certifications[0]['hercertificering_glaszetter'] )
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="" aria-expanded="true" aria-controls="collapseOne">Hercertificering glaszetter</button>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6"><strong>Datum hercertificering glaszetter</strong></div>
+                                            <div class="col-md-6">{{@$certifications[0]['datum_hercertificering_glaszetter']}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6"><strong>Vervaldatum hercertificering glaszetter </strong></div>
+                                            <div class="col-md-6">{{@date('d-m-Y',strtotime($certifications[0]['vervaldatum_hercertificering_glaszetter']))}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6"><strong>Hercertificeringscode glaszetter</strong></div>
+                                            <div class="col-md-6">{{@date('d-m-Y',strtotime($certifications[0]['hercertificeringscode_glaszetter']))}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Hercertificeringscode glaszetter</th>
+                                                            <th>Hercertificeringscijfer glaszetter</th>
+                                                            <th>Hercertificeringspasnummer glaszetter</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($certifications as $certification)
+                                                        <tr>
+                                                            <td>
+                                                                {{$certification['hercertificeringscode_glaszetter']}}
+                                                            </td>
+                                                            <td>
+                                                                {{$certification['hercertificeringscijfer_glaszetter']}}
+                                                            </td>
+                                                            <td>
+                                                                {{$certification['hercertificeringspasnummer_glaszetter']}}
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
+                            @endif
                         </div>
 
 

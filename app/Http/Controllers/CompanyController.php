@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Validators\ValidationException;
@@ -104,7 +105,14 @@ class CompanyController extends Controller {
 			$data['telefoonnummer'] = $request->telefoonnummer;
 			$data['emailadres'] = $request->emailadres;
 			$data['keurmerk'] = $request->keurmerk;
+			$data['details'] = $request->details;
 			Company::create($data);
+
+			Client::create([
+				'nummer_certificaat' => $request->nummer_certificaat,
+				'email_receipt' => $request->email_receipt,
+				'email' => $request->email_contact,
+			]);
 
 
 			return response()->json(['success' => __('Data Added successfully.')]);
@@ -199,9 +207,17 @@ class CompanyController extends Controller {
             $data['telefoonnummer'] = $request->telefoonnummer;
             $data['emailadres'] = $request->emailadres;
             $data['keurmerk'] = $request->keurmerk;
+			$data['details'] = $request->details;
+			$item = Company::whereId($id);
+			$item->update($data);
 
-			Company::whereId($id)->update($data);
-            $data = Company::findOrFail($id);
+			Client::where('company_id',$id)->update([
+				'nummer_certificaat' => $request->nummer_certificaat,
+				'email_receipt' => $request->email_receipt,
+				'email' => $request->email_contact,
+			]);
+		
+			$data = Company::findOrFail($id);
 
 			return response()->json(['success' => __('Data is successfully updated'), 'data' => $data]);
 

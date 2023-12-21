@@ -237,7 +237,6 @@ class EmployeeController extends Controller
 
 		$roles = Role::where('id', '!=', 3)->where('is_active', 1)->select('id', 'name')->get(); //--new--
 		$certifications = $employee->certifications->makeHidden(['created_at', 'updated_at', 'employee_id'])->toArray();
-		
 		return view('employee.dashboard', compact(
 			'employee',
 			'countries',
