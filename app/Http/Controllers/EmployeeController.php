@@ -213,6 +213,20 @@ class EmployeeController extends Controller
 
 	public function show(Employee $employee)
 	{	
+		$logged_user = auth()->user();
+
+		if( isset($logged_user->role_users_id) && $logged_user->role_users_id == User::CLIENT ){
+			$allEmployeesIds = Employee::query(true)
+			->when(isset($logged_user->role_users_id) && $logged_user->role_users_id == User::CLIENT, function ($q) use ($logged_user) {
+				$q->whereHas('companies', function ($q) use ($logged_user) {
+					$q->whereId($logged_user->client->company_id);
+				});
+			})->pluck('id')->toArray();
+			if( !in_array( $employee->id, $allEmployeesIds ) ){
+				abort(403);
+			}
+		}
+
 		$companies = Company::select('id', 'organisatie')->get();
 		$departments = department::select('id', 'department_name')
 			->where('company_id', $employee->company_id)
@@ -645,7 +659,8 @@ class EmployeeController extends Controller
 		$certification = Certification::find($id);
 		$pdf = PDF::loadView('employee.pdf.glaszetten', ['employee' => $certification->employee, 'certification' => $certification->toArray()]);
 		// return view('employee.pdf.glaszetten', ['employee' => $certification->employee, 'certification' => $certification->toArray()]);
-		return $pdf->stream(__('GLASZETTEN') . ".pdf");
+		
+		// return $pdf->stream(__('GLASZETTEN') . ".pdf");
 		return $pdf->download(__('GLASZETTEN') . ".pdf");
 	}
 

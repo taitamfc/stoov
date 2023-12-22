@@ -2,20 +2,33 @@
 <style>
 	@font-face {
 		font-family: 'Good Pro';
-		src: url('{{ asset("fonts/FFGoodPro-Regular.woff2") }}') format('woff2'),
-			url('{{ asset("fonts/FFGoodPro-Regular.woff") }}') format('woff');
-		font-weight: normal;
-		font-style: normal;
-	}
-
-	@font-face {
-		font-family: 'Good Pro';
-		src: url('../fonts/FFGoodPro-Medium.woff2') format('woff2'),
-			url('../fonts/FFGoodPro-Medium.woff') format('woff');
+		src: local('FF Good Pro Medium'), local('FF-Good-Pro-Medium'),
+			url( {{ asset('storage/fonts/FFGoodPro-Medium.woff2') }}) format('woff2'),
+			url( {{ asset('storage/fonts/FFGoodPro-Medium.woff') }}) format('woff'),
+			url( {{ asset('storage/fonts/FFGoodPro-Medium.ttf') }} ) format('truetype');
 		font-weight: 500;
 		font-style: normal;
 	}
 
+	@font-face {
+		font-family: 'Gotham';
+		src: local('Gotham Medium'), local('Gotham-Medium'),
+			url( {{ asset('storage/fonts/Gotham-Medium.woff2') }}) format('woff2'),
+			url( {{ asset('storage/fonts/Gotham-Medium.woff') }}) format('woff'),
+			url( {{ asset('storage/fonts/Gotham-Medium.ttf') }} ) format('truetype');
+		font-weight: 500;
+		font-style: normal;
+	}
+
+	@font-face {
+		font-family: 'Gotham';
+		src: local('Gotham Thin'), local('Gotham-Thin'),
+			url( {{ asset('storage/fonts/Gotham-Thin.woff2') }}) format('woff2'),
+			url( {{ asset('storage/fonts/Gotham-Thin.woff') }}) format('woff'),
+			url( {{ asset('storage/fonts/Gotham-Thin.ttf') }} ) format('truetype');
+		font-weight: normal;
+		font-style: normal;
+	}
 
 
 	:root {

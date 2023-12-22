@@ -25,11 +25,16 @@ class CertificationImport implements ToCollection, WithHeadingRow, WithValidatio
 		$data = [];
 		foreach ($rows as $row) {
 			$employee = Employee::where('achternaam', $row['achternaam'])
-				->where('geboortedatum', $this->checkNullFormatDate($row['geboortedatum']))
+				// ->where('geboortedatum', $this->checkNullFormatDate($row['geboortedatum']))
 				->first();
-
-			$params = [
+				
+			$params = [];
+			foreach( $row as $key => $value ){
+				$params[$key] = $value;
+			}
+			$new_params = [
 				'employee_id' => $employee ? $employee->id : null,
+				'geboortedatum' => $this->checkNullFormatDate($row['geboortedatum']),
 				'datum_uitgifte_vca' => $this->checkNullFormatDate($row['datum_uitgifte_vca']),
 				'vervaldatum_vca' => $this->checkNullFormatDate($row['vervaldatum_vca']),
 				'certificaatnummer' => $row['certificaatnummer'],
@@ -59,6 +64,15 @@ class CertificationImport implements ToCollection, WithHeadingRow, WithValidatio
 				'hercertificeringspasnummer_glaszetter' => $row['hercertificeringspasnummer_glaszetter'],
 				'notitie' => $row['notitie'],
 			];
+			$params = array_merge($params,$new_params);
+			// unset($params['achternaam']);
+			// unset($params['examencijfer_glasmonteur']);
+			// unset($params['geboortedatum']);
+			// unset($params['geboorteplaats']);
+			// unset($params['initialen']);
+			// unset($params['organisatie']);
+			// unset($params['rummer']);
+			// unset($params['tussenvoegsel']);
 			$data[] = $params;
 		}
 
@@ -80,6 +94,26 @@ class CertificationImport implements ToCollection, WithHeadingRow, WithValidatio
 	 */
 	public function checkNullFormatDate($input)
 	{
+		if($input){
+			$input = explode('/',$input);
+			if( isset($input[0]) && isset($input[1]) && isset($input[2]) ){
+				$input = $input[1] .'-'.$input[0].'-'.$input[2];
+				$input = date('Y-m-d',strtotime($input));
+			}else{
+				$input = null;
+			}
+		}else{
+			$input = null;
+		}
+		return $input;
+
+		$input = str_replace('/','-',$input);
+		if($input){
+			$input = date('Y-m-d',strtotime($input));
+		}else{
+			$input = null;
+		}
+		return $input;
 		try {
 			if ($input === null || $input === '') {
 				return null;
