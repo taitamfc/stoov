@@ -21,12 +21,12 @@
                 </a>
             </div>
         </div>
-        @if(checkSubmitLoomsom())
+        @if(!$checkSubmitLoomsom)
         <div class="row">
             <!-- <div class="col-12">
                 <p>Jaar, omschrijving
-                    {{ now()->year - 1 }} <a href="{{ route('client-get-loonsomopgave') }}">Loonsompgave</a></p>
-            </div> -->
+                    {{ now()->year  }} <a href="{{ route('client-get-loonsomopgave') }}">Loonsompgave</a></p>
+            </div>
             
         </div>
         <div class="row">
@@ -42,8 +42,8 @@
                         </thead>
                         <tbody>
                             <tr>
-                            <td>{{ now()->year - 1 }}</td>
-                            <td>Loonsomopgave {{ now()->year - 1 }}</td>
+                            <td>{{ now()->year }}</td>
+                            <td>Loonsomopgave {{ now()->year }}</td>
                             <td><a href="{{ route('client-get-loonsomopgave') }}">{{ __('Verwerken Aangifte') }}</a></td>
                             </tr>
                         </tbody>

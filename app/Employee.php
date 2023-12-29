@@ -32,6 +32,7 @@ class Employee extends Model
 		'vevaldatum_vca',
 		'vervaldatum_glasmonteur',
 		'vervaldatum_glaszetter',
+		'rnummer',
 	];
 
 	public function getFullNameAttribute() {

@@ -203,10 +203,15 @@ class CourseService
         $params['deelnemerslijst'] = $request->hasFile('deelnemerslijst') ? $this->fileService->uploadFile($this->storageFolderPath, $request->deelnemerslijst) : $fields['deelnemerslijst'] ?? null;
         $request = $request->all();
         $amountRequest = 0;
-        foreach (@$request['data_deelnemerslijst'] ?? [] as $index => $item) {
-            $params['data_deelnemerslijst'][$index]["hoogte_verletvergoeding"] = @config('course.compensation_amount')[$request['data_deelnemerslijst'][$index]["hoogte_verletvergoeding"]] ?? null;
-            $amountRequest += (float) $item['hoogte_verletvergoeding'];
+        if(!empty($request['data_deelnemerslijst'])){
+            foreach (@$request['data_deelnemerslijst'] ?? [] as $index => $item) {
+                if( isset($request['data_deelnemerslijst'][$index]["hoogte_verletvergoeding"]) ){
+                    $params['data_deelnemerslijst'][$index]["hoogte_verletvergoeding"] = @config('course.compensation_amount')[$request['data_deelnemerslijst'][$index]["hoogte_verletvergoeding"]] ?? null;
+                    $amountRequest += (float) $item['hoogte_verletvergoeding'];
+                }
+            }
         }
+        
         return [
             'type' => Course::TYPE_VERLETVERGOEDING,
             'content' => json_encode($params),
