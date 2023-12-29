@@ -292,14 +292,6 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($certifications as $certification)
-                                                        @php
-                                                            $certification['examen_glasmonteur'] = trim($certification['examen_glasmonteur']);
-                                                            $certification['examencode_glasmonteur'] = trim($certification['examencode_glasmonteur']);
-                                                            $certification['examencijfer_glasmonteur'] = trim($certification['examencijfer_glasmonteur']);
-                                                            if(!$certification['examen_glasmonteur'] && !$certification['examencode_glasmonteur'] && !$certification['examencijfer_glasmonteur']){
-                                                                continue;
-                                                            }
-                                                        @endphp
                                                         <tr>
                                                             <td>
                                                                 {{$certification['examen_glasmonteur']}}
@@ -356,15 +348,6 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($certifications as $certification)
-                                                        @php
-                                                            $certification['hercertificeringscode_glasmonteur'] = trim($certification['hercertificeringscode_glasmonteur']);
-                                                            $certification['hercertificeringscijfer_glasmonteur'] = trim($certification['hercertificeringscijfer_glasmonteur']);
-                                                            $certification['hercertificeringspasnummer_glasmonteur'] = trim($certification['hercertificeringspasnummer_glasmonteur']);
-                                                            if( !$certification['hercertificeringscode_glasmonteur'] && !$certification['hercertificeringscijfer_glasmonteur'] && !$certification['hercertificeringspasnummer_glasmonteur'] ){
-                                                                continue;
-                                                            }
-                                                        @endphp
-                                                        
                                                         <tr>
                                                             <td>
                                                                 {{$certification['hercertificeringscode_glasmonteur']}}
@@ -422,14 +405,6 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($certifications as $certification)
-                                                            @php
-                                                                $certification['examen_glaszetter'] = trim($certification['examen_glaszetter']);
-                                                                $certification['examencode_glaszetter'] = trim($certification['examencode_glaszetter']);
-                                                                $certification['examencijfer_glaszetter'] = trim($certification['examencijfer_glaszetter']);
-                                                                if( !$certification['examen_glaszetter'] && !$certification['examencode_glaszetter'] && !$certification['examencijfer_glaszetter'] ){
-                                                                    continue;
-                                                                }
-                                                            @endphp
                                                         <tr>
                                                             <td>
                                                                 {{$certification['examen_glaszetter']}}
@@ -500,14 +475,6 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($certifications as $certification)
-                                                        @php
-                                                            $certification['hercertificeringscode_glaszetter'] = trim($certification['hercertificeringscode_glaszetter']);
-                                                            $certification['hercertificeringscijfer_glaszetter'] = trim($certification['hercertificeringscijfer_glaszetter']);
-                                                            $certification['hercertificeringspasnummer_glaszetter'] = trim($certification['hercertificeringspasnummer_glaszetter']);
-                                                            if( !$certification['hercertificeringscode_glaszetter'] && !$certification['hercertificeringscijfer_glaszetter'] && !$certification['hercertificeringspasnummer_glaszetter'] ){
-                                                                continue;
-                                                            }
-                                                        @endphp
                                                         <tr>
                                                             <td>
                                                                 {{$certification['hercertificeringscode_glaszetter']}}

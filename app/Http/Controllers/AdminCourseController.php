@@ -249,13 +249,17 @@ class AdminCourseController extends Controller
 			Course::TYPE_VERLETVERGOEDING,
 			Course::TYPE_OPLEIDINGSVERGOEDING
 		])->first();
+		
+		if(!$course){
+			$course = Course::where('id', $id)->first();
+		}
 
 		$client = @Client::whereId($course->user_id)->first();
 		$companyId = @$course->client->company_id ?? null;
 		$fields = $course ? json_decode($course->content, true) : [];
 		$remainingBudget = App::make(CourseService::class)->getRemainingBudget($companyId);
 		$nameFields = [];
-		if (in_array($course->type, [Course::TYPE_VERLETVERGOEDING])) {
+		if ( !empty($course->type) && in_array($course->type, [Course::TYPE_VERLETVERGOEDING])) {
 			$fields = array_merge(['naam' => ($fields['first_name'] ?? null) . '' . ($fields['middle_name'] ?? null) . '' . ($fields['last_name'] ?? null)], $fields);
 			$fields['naam'] = ($fields['first_name'] ?? null) . '' . ($fields['middle_name'] ?? null) . '' . ($fields['last_name'] ?? null);
 			$fields['naam_cursus'] = @Package::whereId($fields['naam_cursus'])->first()->value ?? '';
@@ -266,7 +270,7 @@ class AdminCourseController extends Controller
 				$fields['data_deelnemerslijst'][$key] = unsets($fields['data_deelnemerslijst'][$key], ['first_name', 'middle_name', 'last_name', 'geboortedatum_werknemer_dd', 'geboortedatum_werknemer_mm', 'geboortedatum_werknemer_jjjj']);
 			}
 			$nameFields = Course::LIST_JSON_FIELDS_VERLETVERGOEDING;
-		} elseif (in_array($course->type, [Course::TYPE_OPLEIDINGSVERGOEDING])) {
+		} elseif (!empty($course->type) && in_array($course->type, [Course::TYPE_OPLEIDINGSVERGOEDING])) {
 			$fields = array_merge(['naam' => ($fields['first_name'] ?? null) . '' . ($fields['middle_name'] ?? null) . '' . ($fields['last_name'] ?? null)], $fields);
 			$fields['naam'] = implode(' ', [@$fields['first_name'], @$fields['middle_name'], @$fields['last_name']]);
 			$fields['naam_cursus'] = @Package::whereId($fields['naam_cursus'])->first()->value ?? '';
@@ -276,8 +280,7 @@ class AdminCourseController extends Controller
 				$fields['data_deelnemerslijst'][$key] = unsets($fields['data_deelnemerslijst'][$key], ['first_name', 'middle_name', 'last_name', 'geboortedatum_werknemer_dd', 'geboortedatum_werknemer_mm', 'geboortedatum_werknemer_jjjj']);
 			}
 			$nameFields = Course::LIST_JSON_FIELDS_OPLEIDINGSVERGOEDING;
-		}
-
+		}		if( !empty($fields['factuur']) ){			$fields['factuur'] = str_replace('https://aanvragen.stoov.nl/wp-content/uploads','',$fields['factuur']);		}		if( !empty($fields['certificaat']) ){			$fields['certificaat'] = str_replace('https://aanvragen.stoov.nl/wp-content/uploads','',$fields['certificaat']);		}
 		return view('course.ingezonden_formulieren_show', [
 			'course' => $course,
 			'fields' => $fields,

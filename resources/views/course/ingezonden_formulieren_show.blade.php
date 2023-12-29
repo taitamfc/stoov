@@ -21,7 +21,7 @@
                         </div>
                         <div class="col-12 form-group">
                             <label class="text-bold">{{ __('Datum bewerkt') }}</label>
-                            <p>{{ formatDate($course->updated_at) }}</p>
+                            <p>{{ @formatDate($course->updated_at) }}</p>
                         </div>
                         <div class="col-12 form-group">
                             <label class="text-bold">{{ __('Actueel budget') }}</label>
@@ -34,7 +34,7 @@
                                     @foreach (\App\Course::APPROVED_LIST as $index => $approved)
                                         <label class="radio-inline">
                                             <input type="radio" name="is_approved" value="{{ $index }}"
-                                                {{ $course->is_approved == $index ? 'checked' : null }}>{{ __($approved) }}
+                                                {{ @$course->is_approved == $index ? 'checked' : null }}>{{ __($approved) }}
                                         </label>
                                     @endforeach
                                 @else
@@ -49,22 +49,24 @@
                                 @endif
                             </div>
                         </div>
-                        @if ($course->type !== \App\Course::TYPE_LOONSOMOPGAVE)
+                        @if (@$course->type !== \App\Course::TYPE_LOONSOMOPGAVE)
                             <div class="col-6 form-group d-none" id="box-reden">
                                 <label class="text-bold">{{ __('Reden') }}</label>
-                                <p><input type="text" name="reden" id="reden" value="{{ $course->reden }}"></p>
+                                <p><input type="text" name="reden" id="reden" value="{{ @$course->reden }}"></p>
                             </div>
                         @endif
                         <div class="col-12 row">
                             <div class="col-md-6 form-group">
                                 <label class="text-bold">{{ __('Amount Request') }}</label>
-                                <p>{{ getNumberFormat($course->amount_request ?? 0) }}</p>
+                                <p>{{ @getNumberFormat($course->amount_request ?? 0) }}</p>
                             </div>
                             <div class="col-2">
+								@if (auth()->user()->role_users_id == \App\User::ADMINISTRATOR)
                                 <a type="button" class="btn btn-info w-100 mt-3"
-                                    href="{{ route('course.edit', ['id' => $course->id]) }}">
+                                    href="{{ route('course.edit', ['id' => @$course->id]) }}">
                                     {{ __('Bewerken') }}
                                 </a>
+								@endif
                             </div>
                         </div>
                         <div class="row col-12">
@@ -77,7 +79,7 @@
                                 @elseif($name === 'inzenddatum')
                                     <div class="col-md-6 form-group">
                                         <label class="text-bold">{{ __('Inzenddatum') }}</label>
-                                        <p>{{ formatDate($course->created_at) }}</p>
+                                        <p>{{ @formatDate($course->created_at) }}</p>
                                     </div>
                                 @elseif($name === 'full_name')
                                     <div class="col-md-6 form-group">
@@ -142,17 +144,17 @@
                                 @elseif($name === 'id')
                                     <div class="col-md-6 form-group">
                                         <label class="text-bold">{{ __('Id') }}</label>
-                                        <p>{{ $course->id }}</p>
+                                        <p>{{ @$course->id }}</p>
                                     </div>
                                 @elseif($name === 'datum_tot')
                                     <div class="col-md-6 form-group">
                                         <label class="text-bold">{{ __('Datum tot') }}</label>
-                                        <p>{{ formatDate(@$fields[$name]) }}</p>
+                                        <p>{{ @formatDate(@$fields[$name]) }}</p>
                                     </div>
                                 @elseif($name === 'datum_cursus_van')
                                     <div class="col-md-6 form-group">
                                         <label class="text-bold">{{ __('Datum cursus van') }}</label>
-                                        <p>{{ formatDate(@$fields[$name]) }}</p>
+                                        <p>{{ @formatDate(@$fields[$name]) }}</p>
                                     </div>
                                 @elseif($name === 'subsidiepercentage_dat_van_toepassing_is')
                                     <div class="col-md-6 form-group">
@@ -241,7 +243,7 @@
             event.preventDefault();
             var attendance_type = $("#attendance_type").val();
             $.ajax({
-                url: "{{ route('course.update', $course->id) }}",
+                url: "{{ route('course.update', @$course->id) }}",
                 method: "POST",
                 data: new FormData(this),
                 contentType: false,

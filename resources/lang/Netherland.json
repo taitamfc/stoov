@@ -1000,7 +1000,7 @@
     "Name first": "Naam eerst ",
     "Name middle": "Naam midden",
     "Name last": "Achternaam",
-    "E-mail": "E-mail",
+    "E-mail": "E-mailadres",
     "Amount Request": "Bedrag aangevraagd",
     "Company Information": "Bedrijfsgegevens",
     "Client name": "Naam klant",
@@ -1008,5 +1008,8 @@
     "Company contact": "Contactpersoon bedrijf",
     "Company website": "Website bedrijf",
     "Company email": "E-mail bedrijf",
-    "No":"Nee"
+    "No":"Nee",
+    "First name":"Voornaam",
+    "Middle name":"Tussenvoegsel",
+    "Last name":"Achternaam"
 }

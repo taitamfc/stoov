@@ -116,7 +116,7 @@ class CourseService
                 if (@$request->reden) {
                     $data['reden'] = $request->reden;
                 }
-                $course = $course->update($data);
+                $course->update($data);
             } else {
                 $data['amount_request'] = (float) $request['subsidiepercentage_dat_van_toepassing_is'] / 100 * $request['totaalbedrag_subsidie_aanvraag'];
                 $data['is_approved'] = Course::IS_WAIT_CONFIRM;

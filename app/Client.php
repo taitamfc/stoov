@@ -34,8 +34,7 @@ class Client extends Model
 		'relatienummer',
 		'kvk',
 		'email_receipt',
-		'btwnummer',
-		'nummer_certificaat',
+		'btwnummer'
 	];
 
 	protected $appends = ['country_name'];

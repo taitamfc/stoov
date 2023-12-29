@@ -43,11 +43,13 @@ class PasswordReset extends Notification
         return (new MailMessage)
         ->line('Uw inloggegevens voor de portal van STOOV.')
         ->line('Geachte heer/mevrouw,')
-        ->line('U kunt inloggen op portal.fondsstoov.nl met de volgende gegevens.')
+        ->line('U kunt inloggen op fondsstoov.nl met de volgende gegevens.')
         ->action('Wachtwoord opnieuw instellen', url('password/reset', $this->token))
-        ->line('Heeft u vragen? Neem dan contact op met STOOV via portal.fondsstoov.nl')
-        ->line('Met vriendelijke groet,');
-        
+        ->line('Heeft u vragen? Neem dan contact op met STOOV via fondsstoov.nl')
+        ->line('Met vriendelijke groet,')
+        ->line('Cor Wittekoek')
+        ->line('STOOV')
+        ->line('Dit is een automatisch gegenereerd e-mailbericht.');
     }
 
     /**
