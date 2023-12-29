@@ -168,8 +168,7 @@
                                     <div class="col-md-6 form-group">
                                         <label class="text-bold">{{ __(ucfirst(str_replace('_', ' ', $name))) }}</label>
                                         <p>
-                                            <a
-                                                href="{{ @$fields[$name] }}">{{ removeExtension($deelnemerslijst[count($deelnemerslijst) - 1]) }}</a>
+                                            <a target="_blank" href="{{ @$fields[$name] }}">{{ removeExtension($deelnemerslijst[count($deelnemerslijst) - 1]) }}</a>
                                         </p>
                                     </div>
                                 @else

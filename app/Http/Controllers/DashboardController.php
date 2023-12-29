@@ -461,7 +461,8 @@ class DashboardController extends Controller
 
 		return view('dashboard.client_dashboard', compact(
 			'user',
-			'client'
+			'client',
+			'checkSubmitLoomsom',
 		));
 	}
 

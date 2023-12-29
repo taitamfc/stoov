@@ -27,6 +27,7 @@ class EmployeeImport implements ToCollection, WithHeadingRow, WithValidation, Wi
 			$companyNames = explode("|", $row['organisatie']);
 			$companyIds = count($companyNames) ? Company::whereIn('organisatie', $companyNames)->select('id')->get()->pluck('id')->toArray() : [];
 			$params = [
+				'rnummer' => @$row['rnummer'],
 				'initialen' => @$row['initialen'],
 				'tussenvoegsel' => $row['tussenvoegsel'],
 				'toevoeging' => $row['toevoeging'],
