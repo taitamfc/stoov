@@ -21,12 +21,12 @@
                 </a>
             </div>
         </div>
-        @if(!checkSubmitLoomsom())
+        @if(checkSubmitLoomsom())
         <div class="row">
-            <div class="col-12">
+            <!-- <div class="col-12">
                 <p>Jaar, omschrijving
                     {{ now()->year - 1 }} <a href="{{ route('client-get-loonsomopgave') }}">Loonsompgave</a></p>
-            </div>
+            </div> -->
             
         </div>
         <div class="row">

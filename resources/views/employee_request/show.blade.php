@@ -24,7 +24,7 @@
                         <p>{{ $detail->birthdate ?  \Carbon\Carbon::parse($detail->birthdate)->format('d-m-Y') : "" }}</p>
                     </div>
                     <div class="col-md-12 form-group">
-                        <label class="text-bold">{{__('Berdrijf')}} <span class="text-danger">*</span></label>
+                        <label class="text-bold">{{__('Bedrijf')}} <span class="text-danger">*</span></label>
                         <p>{{ $detail->client->company->organisatie ?? "" }}</p>
                     </div>
                     <div class="col-md-4 form-group">

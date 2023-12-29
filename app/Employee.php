@@ -161,4 +161,9 @@ class Employee extends Model
 	public function certifications(){
 		return $this->hasMany(Certification::class, 'employee_id', 'id');
 	}
+
+	public function certificates()
+    {
+        return $this->hasMany(Certification::class);
+    }
 }

@@ -280,7 +280,14 @@ class AdminCourseController extends Controller
 				$fields['data_deelnemerslijst'][$key] = unsets($fields['data_deelnemerslijst'][$key], ['first_name', 'middle_name', 'last_name', 'geboortedatum_werknemer_dd', 'geboortedatum_werknemer_mm', 'geboortedatum_werknemer_jjjj']);
 			}
 			$nameFields = Course::LIST_JSON_FIELDS_OPLEIDINGSVERGOEDING;
-		}		if( !empty($fields['factuur']) ){			$fields['factuur'] = str_replace('https://aanvragen.stoov.nl/wp-content/uploads','',$fields['factuur']);		}		if( !empty($fields['certificaat']) ){			$fields['certificaat'] = str_replace('https://aanvragen.stoov.nl/wp-content/uploads','',$fields['certificaat']);		}
+		}		
+		if( !empty($fields['factuur']) ){			
+			$fields['factuur'] = str_replace('https://aanvragen.stoov.nl/wp-content/uploads','',$fields['factuur']);		
+			
+		}		
+		if( !empty($fields['certificaat']) ){			
+			$fields['certificaat'] = str_replace('https://aanvragen.stoov.nl/wp-content/uploads','',$fields['certificaat']);		
+		}
 		return view('course.ingezonden_formulieren_show', [
 			'course' => $course,
 			'fields' => $fields,
@@ -322,6 +329,10 @@ class AdminCourseController extends Controller
 	{
 		try {
 			$course = Course::whereNotNull('email')->where('id', $id)->first();
+			$courseData = $course->toArray();
+			$requestData = $request->toArray();
+			$request->merge($courseData);
+			$request->merge($requestData);
 
 			if ($course->type === Course::TYPE_VERLETVERGOEDING) {
 				$this->courseService->postFormVerletvergoeding($request, null, $id);

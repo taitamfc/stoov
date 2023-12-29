@@ -26,4 +26,12 @@ class Company extends Model
 	{
 		return $this->hasOne(Client::class, 'company_id', 'id');
 	}
+	public function employees()
+	{
+		return $this->belongsToMany(Employee::class, 'user_company','company_id','user_id');
+	}
+	public function certificates()
+    {
+        return $this->hasManyThrough(Certification::class, Employee::class);
+    }
 }
