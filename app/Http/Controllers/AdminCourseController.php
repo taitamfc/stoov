@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Budget;
 use App\Client;
 use App\Course;
@@ -25,11 +23,9 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
-
 class AdminCourseController extends Controller
 {
 	protected $courseService;
-
 	/**
 	 * Create a new controller instance.
 	 *
@@ -39,7 +35,6 @@ class AdminCourseController extends Controller
 	{
 		$this->courseService = $courseService;
 	}
-
 	/**
 	 * @param \Illuminate\Http\Request $request
 	 * 
@@ -71,7 +66,6 @@ class AdminCourseController extends Controller
 			})
 			->orderBy('created_at', 'desc')
 			->get();
-
 		if (request()->ajax()) {
 			$user = auth()->user();
 			return  datatables()->of($courses)
@@ -106,7 +100,6 @@ class AdminCourseController extends Controller
 							$type = __('Loonsomopgave');
 							break;
 					}
-
 					return $type;
 				})
 				->addColumn('is_approved', function ($data) {
@@ -126,10 +119,8 @@ class AdminCourseController extends Controller
 				})
 				->make(true);
 		}
-
 		return view('course.ingezonden_formulieren', compact('courses'));
 	}
-
 	/**
 	 * @param \Illuminate\Http\Request $request
 	 * 
@@ -161,7 +152,6 @@ class AdminCourseController extends Controller
 			})
 			->orderBy('created_at', 'desc')
 			->get();
-
 		if (request()->ajax()) {
 			return  datatables()->of($courses)
 				->setRowId(function ($row) {
@@ -201,7 +191,6 @@ class AdminCourseController extends Controller
 							$type = __('Loonsomopgave');
 							break;
 					}
-
 					return $type;
 				})
 				->addColumn('is_approved', function ($data) {
@@ -214,35 +203,25 @@ class AdminCourseController extends Controller
 					$button = '';
 					$button .= '<a href="' . route('loonsomopgaves.show', ['id' => $data->id]) . '"  class="edit btn btn-info btn-sm"><i class="dripicons-preview"></i></button></a> ';
 					$button .= '<a href="' . route('loonsomopgaves.edit', ['id' => $data->id]) . '"  class="edit btn btn-primary btn-sm"><i class="dripicons-document-edit"></i></button></a>';
-
 					return $button;
 				})
 				->make(true);
 		}
-
 		return view('course.loonsomopgaves', compact('courses'));
 	}
-
-
 	public function sendMails(Request $request)
 	{
 		$admin = auth()->user()->role_users_id == User::ADMINISTRATOR;
-
 		if (!!$admin) {
 			$ids = $request['employeeIdArray'];
-
 			$mails = Course::whereNotNull('email')->whereIn('id', $ids)->get();
-
 			foreach ($mails as $email) {
 				dispatch(new ContactSendMailJob($email));
 			}
-
 			return response()->json(['success' => __('Send mail is success')]);
 		}
-
 		return response()->json(['success' => __('You are not authorized')]);
 	}
-
 	public function show($id)
 	{
 		$course = Course::where('id', $id)->whereIn('type', [
@@ -253,7 +232,6 @@ class AdminCourseController extends Controller
 		if(!$course){
 			$course = Course::where('id', $id)->first();
 		}
-
 		$client = @Client::whereId($course->user_id)->first();
 		$companyId = @$course->client->company_id ?? null;
 		$fields = $course ? json_decode($course->content, true) : [];
@@ -297,7 +275,6 @@ class AdminCourseController extends Controller
 			'client' => $client
 		]);
 	}
-
 	public function edit($id)
 	{
 		$course = Course::where('id', $id)->whereIn('type', [
@@ -318,14 +295,12 @@ class AdminCourseController extends Controller
 			$q->whereId($user->company_id);
 		})
 			->get();
-
 		if ($course->type == Course::TYPE_VERLETVERGOEDING) {
 			return view('course.verletvergoeding_edit', compact('id', 'course', 'fields', 'courses', 'compensationAmounts', 'employees'));
 		} elseif ($course->type == Course::TYPE_OPLEIDINGSVERGOEDING) {
 			return view('course.opleidingsvergoeding_edit', compact('id', 'course', 'fields', 'courses', 'compensationAmounts', 'employees'));
 		}
 	}
-
 	public function update(Request $request, $id)
 	{
 		try {
@@ -334,7 +309,6 @@ class AdminCourseController extends Controller
 			$requestData = $request->toArray();
 			$request->merge($courseData);
 			$request->merge($requestData);
-
 			if ($course->type === Course::TYPE_VERLETVERGOEDING) {
 				$this->courseService->postFormVerletvergoeding($request, null, $id);
 			} elseif ($course->type === Course::TYPE_OPLEIDINGSVERGOEDING) {
@@ -347,8 +321,6 @@ class AdminCourseController extends Controller
 			return response()->json(['error' => $e->getMessage()]);
 		}
 	}
-
-
 	/**
 	 * @param \Illuminate\Http\Request $request
 	 * 
@@ -394,30 +366,24 @@ class AdminCourseController extends Controller
 					} else {
 						$status = __('Mail Error');
 					}
-
 					return $status;
 				})
 				->make(true);
 		}
-
 		return view('course.course-request');
 	}
-
 	public function verletvergoedingImporteren()
 	{
 		return view('course.imports/verletvergoeding-importeren');
 	}
-
 	public function opleidingsvergoedingImporteren()
 	{
 		return view('course.imports/opleidingsvergoeding-importeren');
 	}
-
 	public function loonsomopgaveImporteren()
 	{
 		return view('course.imports/loonsomopgave-importeren');
 	}
-
 	public function postVerletvergoedingImporteren()
 	{
 		try {
@@ -428,7 +394,6 @@ class AdminCourseController extends Controller
 		$this->setSuccessMessage(__('Imported Successfully'));
 		return back();
 	}
-
 	public function postOpleidingsvergoedingImporteren()
 	{
 		try {
@@ -439,7 +404,6 @@ class AdminCourseController extends Controller
 		$this->setSuccessMessage(__('Imported Successfully'));
 		return back();
 	}
-
 	public function postLoonsomopgaveImporteren()
 	{
 		try {
@@ -450,7 +414,6 @@ class AdminCourseController extends Controller
 		$this->setSuccessMessage(__('Imported Successfully'));
 		return back();
 	}
-
 	public function loonsomopgavesShow($id)
 	{
 		$course = Course::where('id', $id)->first();
@@ -461,7 +424,6 @@ class AdminCourseController extends Controller
 		$nameFields = [];
 		$fields['naam_cursus'] = @Package::whereId($fields['naam_cursus'])->first()->value ?? '';
 		$nameFields = Course::LIST_JSON_FIELDS_LOONSOMOPGAVE;
-
 		return view('course.loonsomopgaves_show', [
 			'course' => $course,
 			'fields' => $fields,
@@ -470,7 +432,6 @@ class AdminCourseController extends Controller
 			'client' => $client
 		]);
 	}
-
 	public function loonsomopgavesEdit($id)
 	{
 		$course = Course::where('id', $id)->first();
