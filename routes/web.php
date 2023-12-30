@@ -93,7 +93,7 @@ Route::group(['middleware' => ['XSS']], function ()
 		{
 			Route::post('employees/update', 'EmployeeController@update')->name('employees.update');
 			Route::resource('employees', 'EmployeeController')->except([
-				'destroy', 'create', 'update'
+				'destroy', 'create'
 			]);
 			Route::get('glas-monteren/{id}', 'EmployeeController@glasMonteren')->name('glasMonteren');
 			Route::get('glaszetten/{id}', 'EmployeeController@glaszetten')->name('glaszetten');
@@ -1134,8 +1134,3 @@ Route::group(['middleware' => ['XSS']], function ()
 
 //Employeer
 //Set Null
-
-
-
-
-
