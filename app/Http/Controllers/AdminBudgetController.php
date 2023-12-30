@@ -219,7 +219,7 @@ class AdminBudgetController extends Controller
 			$budget['id'] = @$budget['id'] ?? - 1;
 			$budget['relatienummer'] = @$client->relatienummer ?? null;
 			$budget['year'] = @$budget->year ?? $request->year;
-			$budget['budget_jaartal'] = @$budget->budget_jaartal ?? $request->year;
+			$budget['budget_jaartal'] = @$budget->budget_jaartal ?? $request->year - 1;
 			$budget['medewerkers_aantal'] = @$budget->medewerkers_aantal ?? 0;
 			$companyId = @$client->company_id;
 			$remainingBudget = App::make(CourseService::class)->getRemainingBudget($companyId,$request->year);

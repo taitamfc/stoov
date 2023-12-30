@@ -35,7 +35,7 @@ class CompanyController extends Controller {
 						$employee = $employees->first();
 						if($employee){
 							$certificates = $employees->first()->certificates;
-							if($certificates->count()){
+							if($certificates){
 								return 'Y';
 							}
 						}
@@ -135,7 +135,7 @@ class CompanyController extends Controller {
 				$employee = $employees->first();
 				if($employee){
 					$certificates = $employees->first()->certificates;
-					if($certificates->count()){
+					if($certificates){
 						$keurmerk = 'Y';
 					}
 				}

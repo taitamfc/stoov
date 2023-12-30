@@ -177,7 +177,39 @@
                             <div class="btn-pdf">
                                 <div class="row">
                                     <div class="col-md-12 ">
-                                        @if (@$certifications[0]['vervaldatum_vca'] > \Carbon\Carbon::now()&& $certifications[0]['datum_uitgifte_vca'] < \Carbon\Carbon::now()) @if ($certifications[0]['gewenste_certificatie']==='Beide' ) 
+                                        @php
+                                            $vakcertificaat_glaszetter = \App\Package::where('key',$certifications[0]['examen_glaszetter'])->first();
+                                            $vakcertificaat_glasmonteur = \App\Package::where('key',$certifications[0]['examen_glasmonteur'])->first();
+                                            $glaszetter_pdf = false;
+                                            $glasmonteur_pdf = false;
+                                            if($vakcertificaat_glaszetter){
+                                                $glaszetter_pdf = $vakcertificaat_glaszetter->vakcertificaat_glaszetter;
+                                            }
+                                            if($vakcertificaat_glaszetter){
+                                                $glasmonteur_pdf = $vakcertificaat_glasmonteur->vakcertificaat_glasmonteur;
+                                            }
+                                        @endphp
+                                        @if ($glaszetter_pdf &&  $glasmonteur_pdf) 
+                                            <a href="{{ route('glasMonteren', $certifications[0]['id']) }}" class="btn btn-primary">{{ __('GLAS MONTEREN') }}</a>
+                                            <a href="{{ route('glaszetten', $certifications[0]['id']) }}" class="btn btn-primary">{{ __('GLASZETTEN') }}</a>
+                                        @elseif ($glasmonteur_pdf)
+                                            <a href="{{ route('glasMonteren', $certifications[0]['id']) }}" class="btn btn-primary">{{ __('GLAS MONTEREN') }}</a>
+                                        @elseif ($glaszetter_pdf)
+                                            <a href="{{ route('glaszetten', $certifications[0]['id']) }}" class="btn btn-primary">{{ __('GLASZETTEN') }}</a>
+                                        @endif
+
+                                        @if (!$glasmonteur_pdf && !$glaszetter_pdf ) 
+                                        <div class="btn-empty">Let op certificaat verlopen. Download niet beschikbaar. </div>
+                                        @endif
+
+                                        <!-- @if (@$certifications[0]['vervaldatum_vca'] < \Carbon\Carbon::now() ) 
+                                        <div class="btn-empty">Let op certificaat verlopen. Download niet beschikbaar. </div>
+                                        @endif
+                                        @if (@$certifications[0]['vervaldatum_vca'] < \Carbon\Carbon::now() ) 
+                                        <div class="btn-empty">Let op certificaat verlopen. Download niet beschikbaar. </div>
+                                        @endif -->
+                                        
+                                        <!-- @if (@$certifications[0]['vervaldatum_vca'] > \Carbon\Carbon::now()&& $certifications[0]['datum_uitgifte_vca'] < \Carbon\Carbon::now()) @if ($certifications[0]['gewenste_certificatie']==='Beide' ) 
                                             <a href="{{ route('glasMonteren', $certifications[0]['id']) }}" class="btn btn-primary">{{ __('GLAS MONTEREN') }}</a>
                                             <a href="{{ route('glaszetten', $certifications[0]['id']) }}" class="btn btn-primary">{{ __('GLASZETTEN') }}</a>
                                             @elseif (@$certifications[0]['gewenste_certificatie'] === 'Glasmonteur')
@@ -190,7 +222,7 @@
                                             @endif
                                             @if (@$certifications[0]['vervaldatum_vca'] < \Carbon\Carbon::now() ) <div class="btn-empty">Let op certificaat verlopen. Download niet beschikbaar. </div>
                                             @endif
-                                        @endif
+                                        @endif -->
                                 </div>
                             </div>
                         </div>

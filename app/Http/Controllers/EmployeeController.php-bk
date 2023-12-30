@@ -108,7 +108,6 @@ class EmployeeController extends Controller
 				->addColumn('action', function ($data) {
 					$button = '';
 					$button .= '<a href="employees/' . $data->id . '"  class="edit btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="View Details"><i class="dripicons-preview"></i></button></a>';
-					$button .= '<a href="employees/' . $data->id . '/edit"  class="edit btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="View Details"><i class="dripicons-pencil"></i></button></a>';
 					$button .= '&nbsp;&nbsp;&nbsp;';
 					if (auth()->user()->can('modify-details-employee')) {
 						if ($data->role_users_id != 1) {
@@ -122,7 +121,6 @@ class EmployeeController extends Controller
 		}
 		return view('employee.index', compact('companies', 'roles'));
 	}
-
 	public function store(Request $request)
 	{
 		$logged_user = auth()->user();
@@ -246,137 +244,6 @@ class EmployeeController extends Controller
 			'roles',
 			'certifications'
 		));
-	}
-	public function edit(Employee $employee)
-	{	
-		$logged_user = auth()->user();
-		if( isset($logged_user->role_users_id) && $logged_user->role_users_id == User::CLIENT ){
-			$allEmployeesIds = Employee::query(true)
-			->when(isset($logged_user->role_users_id) && $logged_user->role_users_id == User::CLIENT, function ($q) use ($logged_user) {
-				$q->whereHas('companies', function ($q) use ($logged_user) {
-					$q->whereId($logged_user->client->company_id);
-				});
-			})->pluck('id')->toArray();
-			if( !in_array( $employee->id, $allEmployeesIds ) ){
-				abort(403);
-			}
-		}
-		$companies = Company::select('id', 'organisatie')->get();
-		$departments = department::select('id', 'department_name')
-			->where('company_id', $employee->company_id)
-			->get();
-		$designations = designation::select('id', 'designation_name')
-			->where('department_id', $employee->department_id)
-			->get();
-		$office_shifts = office_shift::select('id', 'shift_name')
-			->where('company_id', $employee->company_id)
-			->get();
-		$statuses = status::select('id', 'status_title')->get();
-		// $roles = Role::select('id', 'name')->get();
-		$countries = DB::table('countries')->select('id', 'name')->get();
-		$document_types = DocumentType::select('id', 'document_type')->get();
-		$education_levels = QualificationEducationLevel::select('id', 'name')->get();
-		$language_skills = QualificationLanguage::select('id', 'name')->get();
-		$general_skills = QualificationSkill::select('id', 'name')->get();
-		$roles = Role::where('id', '!=', 3)->where('is_active', 1)->select('id', 'name')->get(); //--new--
-		$certifications = $employee->certifications->makeHidden(['created_at', 'updated_at', 'employee_id'])->toArray();
-		return view('employee.form-edit', compact(
-			'employee',
-			'countries',
-			'companies',
-			'departments',
-			'designations',
-			'statuses',
-			'office_shifts',
-			'document_types',
-			'education_levels',
-			'language_skills',
-			'general_skills',
-			'roles',
-			'certifications'
-		));
-	}
-	public function update(Request $request,String $id)
-	{
-		// dd($request);
-		$logged_user = auth()->user();
-		if ($logged_user->can('store-details-employee')) {
-			if (request()->ajax() || true) {
-				$rule = 'required';
-				$params = $request->only(
-					'company_ids',
-					'achternaam',
-					'initialen',
-					'toevoeging',
-					'tussenvoegsel',
-					'geboortedatum',
-					'geboorteplaats',
-					'aktief',
-					'in_dienst',
-					'indienst_sinds',
-					'is_onderaannemer',
-					'onderaannemer_sinds',
-					'vevaldatum_vca',
-					'vervaldatum_glasmonteur',
-					'vervaldatum_glaszetter'
-				);
-				$validator = Validator::make(
-					$params,
-					[
-						'company_ids' => $rule . '|array',
-						'achternaam' => $rule,
-						'initialen' => $rule,
-						'toevoeging' => $rule,
-						'tussenvoegsel' => $rule,
-						'geboortedatum' => $rule,
-						'geboorteplaats' => $rule,
-						'aktief' => $rule,
-						'in_dienst' => $rule,
-						'indienst_sinds' => $rule,
-						'is_onderaannemer' => $rule,
-						'onderaannemer_sinds' => $rule,
-						//'vevaldatum_vca' => $rule,
-						//'vervaldatum_glasmonteur' => $rule,
-						//'vervaldatum_glaszetter' => $rule,
-					],[
-						'required' => 'Het veld :attribute is verplicht.'
-					]
-				);
-				if ($validator->fails()) {
-					if (!request()->ajax() ) {
-						return redirect()->back()->with(['errors' => $this->valid($validator)]);
-					}
-					return response()->json(['errors' => $this->valid($validator)]);
-				}
-				DB::beginTransaction();
-				try {
-					unset($params['company_ids']);
-					$params['geboortedatum'] = date('Y-m-d', strtotime($params['geboortedatum']));
-					$params['vervaldatum_glasmonteur'] = date('Y-m-d', strtotime($params['vervaldatum_glasmonteur']));
-					$params['vervaldatum_glaszetter'] = date('Y-m-d', strtotime($params['vervaldatum_glaszetter']));
-					$params['vevaldatum_vca'] = date('Y-m-d', strtotime($params['vevaldatum_vca']));
-					$params['onderaannemer_sinds'] = date('Y-m-d', strtotime($params['onderaannemer_sinds']));
-					$params['indienst_sinds'] = date('Y-m-d', strtotime($params['indienst_sinds']));
-					$employee = Employee::create($params);
-					foreach($request->company_ids as $company) {
-						$employee->companies()->attach($company);
-					}
-					
-					DB::commit();
-				} catch (Exception $e) {
-					DB::rollback();
-					return response()->json(['error' => $e->getMessage()]);
-				} catch (Throwable $e) {
-					DB::rollback();
-					return response()->json(['error' => $e->getMessage()]);
-				}
-				if (!request()->ajax() ) {
-					return redirect()->back()->with(['success' => __('Data Added successfully.')]);
-				}
-				return response()->json(['success' => __('Data Added successfully.')]);
-			}
-		}
-		return response()->json(['success' => __('You are not authorized')]);
 	}
 	public function destroy($id)
 	{
