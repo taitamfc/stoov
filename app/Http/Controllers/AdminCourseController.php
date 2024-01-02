@@ -262,10 +262,12 @@ class AdminCourseController extends Controller
 			$nameFields = Course::LIST_JSON_FIELDS_OPLEIDINGSVERGOEDING;
 		}		
 		if( !empty($fields['factuur']) ){			
-			$fields['factuur'] = str_replace('https://aanvragen.stoov.nl/wp-content/uploads','',$fields['factuur']);
+			$fields['factuur'] = str_replace('https://aanvragen.stoov.nl/wp-content/uploads','/',$fields['factuur']);
+			$fields['factuur'] = asset($fields['factuur']);
 		}		
 		if( !empty($fields['certificaat']) ){			
-			$fields['certificaat'] = str_replace('https://aanvragen.stoov.nl/wp-content/uploads','',$fields['certificaat']);		
+			$fields['certificaat'] = str_replace('https://aanvragen.stoov.nl/wp-content/uploads','/',$fields['certificaat']);		
+			$fields['certificaat'] = asset($fields['certificaat']);	
 		}
 		return view('course.ingezonden_formulieren_show', [
 			'course' => $course,

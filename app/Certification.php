@@ -22,6 +22,7 @@ class Certification extends Model
         'vervaldatum_gecertificeerd_glasmonteur',
         'examen_glasmonteur',
         'examencode_glasmonteur',
+        'examencijfer_glasmonteur',
         'hercertificering_glasmonteur',
         'datum_hercertificering_glasmonteur',
         'vervaldatum_hercertificering_glasmonteur',

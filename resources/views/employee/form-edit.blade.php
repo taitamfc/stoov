@@ -272,15 +272,15 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-6"><strong>Pasje gecertificeerd glasmonteur </strong></div>
-                                                <input class="col-md-6 form-control" name="pasje_gecertificeerd_glasmonteur" value="{{@$certifications[0]['pasje_gecertificeerd_glasmonteur']}}">
+                                                <input class="col-md-6 form-control" name="pasje_gecertificeerd_glasmonteur[{{@$certifications[0]['id']}}]" value="{{@$certifications[0]['pasje_gecertificeerd_glasmonteur']}}">
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6"><strong>Datum gecertificeerd glasmonteur</strong></div>
-                                                <input class="col-md-6 form-control" name="pasje_gecertificeerd_glasmonteur" value="{{$certifications[0]['datum_gecertificeerd_glasmonteur'] ? @date('d-m-Y',strtotime($certifications[0]['datum_gecertificeerd_glasmonteur']))  : ''}}">
+                                                <input class="col-md-6 form-control" name="datum_gecertificeerd_glasmonteur[{{@$certifications[0]['id']}}]" value="{{$certifications[0]['datum_gecertificeerd_glasmonteur'] ? @date('d-m-Y',strtotime($certifications[0]['datum_gecertificeerd_glasmonteur']))  : ''}}">
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6"><strong>Vervaldatum certificering glasmonteur</strong></div>
-                                                <input class="col-md-6 form-control" name="pasje_gecertificeerd_glasmonteur" value="{{$certifications[0]['vervaldatum_gecertificeerd_glasmonteur'] ? @date('d-m-Y',strtotime($certifications[0]['vervaldatum_gecertificeerd_glasmonteur']))  : ''}}">
+                                                <input class="col-md-6 form-control" name="vervaldatum_gecertificeerd_glasmonteur[{{@$certifications[0]['id']}}]" value="{{$certifications[0]['vervaldatum_gecertificeerd_glasmonteur'] ? @date('d-m-Y',strtotime($certifications[0]['vervaldatum_gecertificeerd_glasmonteur']))  : ''}}">
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-12">
@@ -295,18 +295,38 @@
                                                         </thead>
                                                         <tbody>
                                                             @foreach ($certifications as $key => $certification)
+                                                            @php 
+                                                            if( 
+                                                                empty($certification['examen_glasmonteur']) && 
+                                                                empty($certification['examencode_glasmonteur']) && 
+                                                                empty($certification['examencijfer_glasmonteur'])
+                                                            ){
+                                                                continue;
+                                                            }
+                                                            @endphp
                                                             <tr>
                                                                 <td>
-                                                                    <input class="col-md-6 form-control" name="examen_glasmonteur[{{ $key }}]" value="{{$certification['examen_glasmonteur']}}">
+                                                                    <input class="col-md-6 form-control" name="examen_glasmonteur[{{ $certification['id'] }}]" value="{{$certification['examen_glasmonteur']}}">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="col-md-6 form-control" name="examencode_glasmonteur[{{ $key }}]" value="{{$certification['examencode_glasmonteur']}}">
+                                                                    <input class="col-md-6 form-control" name="examencode_glasmonteur[{{ $certification['id'] }}]" value="{{$certification['examencode_glasmonteur']}}">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="col-md-6 form-control" name="examencijfer_glasmonteur[{{ $key }}]" value="{{$certification['examencijfer_glasmonteur']}}">
+                                                                    <input class="col-md-6 form-control" name="examencijfer_glasmonteur[{{ $certification['id'] }}]" value="{{$certification['examencijfer_glasmonteur']}}">
                                                                 </td>
                                                             </tr>
                                                             @endforeach
+                                                            <tr>
+                                                                <td>
+                                                                    <input class="col-md-6 form-control" name="examen_glasmonteur[examen_glasmonteur]" value="">
+                                                                </td>
+                                                                <td>
+                                                                    <input class="col-md-6 form-control" name="examencode_glasmonteur[examen_glasmonteur]" value="">
+                                                                </td>
+                                                                <td>
+                                                                    <input class="col-md-6 form-control" name="examencijfer_glasmonteur[examen_glasmonteur]" value="">
+                                                                </td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -351,18 +371,38 @@
                                                         </thead>
                                                         <tbody>
                                                             @foreach ($certifications as $key => $certification)
+                                                            @php 
+                                                            if( 
+                                                                empty($certification['hercertificeringscode_glasmonteur']) && 
+                                                                empty($certification['hercertificeringscijfer_glasmonteur']) && 
+                                                                empty($certification['hercertificeringspasnummer_glasmonteur'])
+                                                            ){
+                                                                continue;
+                                                            }
+                                                            @endphp
                                                             <tr>
                                                                 <td>
-                                                                    <input class="col-md-6 form-control" name="hercertificeringscode_glasmonteur[{{ $key }}]" value="{{$certification['hercertificeringscode_glasmonteur']}}">
+                                                                    <input class="col-md-6 form-control" name="hercertificeringscode_glasmonteur[{{ $certification['id'] }}]" value="{{$certification['hercertificeringscode_glasmonteur']}}">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="col-md-6 form-control" name="hercertificeringscijfer_glasmonteur[{{ $key }}]" value="{{$certification['hercertificeringscijfer_glasmonteur']}}">
+                                                                    <input class="col-md-6 form-control" name="hercertificeringscijfer_glasmonteur[{{ $certification['id'] }}]" value="{{$certification['hercertificeringscijfer_glasmonteur']}}">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="col-md-6 form-control" name="hercertificeringspasnummer_glasmonteur[{{ $key }}]" value="{{$certification['hercertificeringspasnummer_glasmonteur']}}">
+                                                                    <input class="col-md-6 form-control" name="hercertificeringspasnummer_glasmonteur[{{ $certification['id'] }}]" value="{{$certification['hercertificeringspasnummer_glasmonteur']}}">
                                                                 </td>
                                                             </tr>
                                                             @endforeach
+                                                            <tr>
+                                                                <td>
+                                                                    <input class="col-md-6 form-control" name="hercertificeringscode_glasmonteur[hercertificeringscode_glasmonteur]" value="">
+                                                                </td>
+                                                                <td>
+                                                                    <input class="col-md-6 form-control" name="hercertificeringscijfer_glasmonteur[hercertificeringscode_glasmonteur]" value="">
+                                                                </td>
+                                                                <td>
+                                                                    <input class="col-md-6 form-control" name="hercertificeringspasnummer_glasmonteur[hercertificeringscode_glasmonteur]" value="">
+                                                                </td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -374,6 +414,7 @@
 
                                 @if( $certifications[0]['gewenste_certificatie'] == 'Beide'
                                     || $certifications[0]['gewenste_certificatie'] == 'Glaszetter'
+                                    || true
                                 )
                                 <div class="card">
                                     <div class="card-header" id="headingOne">
@@ -385,15 +426,15 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-6"><strong>Pasje gecertificeerd Glaszetter </strong></div>
-                                                <input class="col-md-6 form-control" name="pasje_gecertificeerd_glaszetter" value="{{@$certifications[0]['pasje_gecertificeerd_glaszetter']}}">
+                                                <input class="col-md-6 form-control" name="pasje_gecertificeerd_glaszetter[{{ $certifications[0]['id'] }}]" value="{{@$certifications[0]['pasje_gecertificeerd_glaszetter']}}">
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6"><strong>Datum gecertificeerd Glaszetter </strong></div>
-                                                <input class="col-md-6 form-control" name="datum_gecertificeerd_glaszetter" value="{{@date('d-m-Y',strtotime($certifications[0]['datum_gecertificeerd_glaszetter']))}}">
+                                                <input class="col-md-6 form-control" name="datum_gecertificeerd_glaszetter[{{ $certifications[0]['id'] }}]" value="{{@date('d-m-Y',strtotime($certifications[0]['datum_gecertificeerd_glaszetter']))}}">
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6"><strong>Vervaldatum certificering Glaszetter</strong></div>
-                                                <input class="col-md-6 form-control" name="vervaldatum_gecertificeerd_glaszetter" value="{{@date('d-m-Y',strtotime($certifications[0]['vervaldatum_gecertificeerd_glaszetter']))}}">
+                                                <input class="col-md-6 form-control" name="vervaldatum_gecertificeerd_glaszetter[{{ $certifications[0]['id'] }}]" value="{{@date('d-m-Y',strtotime($certifications[0]['vervaldatum_gecertificeerd_glaszetter']))}}">
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -408,18 +449,38 @@
                                                         </thead>
                                                         <tbody>
                                                             @foreach ($certifications as $key => $certification)
+                                                            @php 
+                                                            if( 
+                                                                empty($certification['examen_glaszetter']) && 
+                                                                empty($certification['examencode_glaszetter']) && 
+                                                                empty($certification['examencijfer_glaszetter'])
+                                                            ){
+                                                                continue;
+                                                            }
+                                                            @endphp
                                                             <tr>
                                                                 <td>
-                                                                <input class="col-md-6 form-control" name="examen_glaszetter[{{ $key }}]" value="{{$certification['examen_glaszetter']}}">
+                                                                <input class="col-md-6 form-control" name="examen_glaszetter[{{ $certification['id'] }}]" value="{{$certification['examen_glaszetter']}}">
                                                                 </td>
                                                                 <td>
-                                                                <input class="col-md-6 form-control" name="examencode_glaszetter[{{ $key }}]" value="{{$certification['examencode_glaszetter']}}">
+                                                                <input class="col-md-6 form-control" name="examencode_glaszetter[{{ $certification['id'] }}]" value="{{$certification['examencode_glaszetter']}}">
                                                                 </td>
                                                                 <td>
-                                                                <input class="col-md-6 form-control" name="examencijfer_glaszetter[{{ $key }}]" value="{{$certification['examencijfer_glaszetter']}}">
+                                                                <input class="col-md-6 form-control" name="examencijfer_glaszetter[{{ $certification['id'] }}]" value="{{$certification['examencijfer_glaszetter']}}">
                                                                 </td>
                                                             </tr>
                                                             @endforeach
+                                                            <tr>
+                                                                <td>
+                                                                <input class="col-md-6 form-control" name="examen_glaszetter[examen_glaszetter]" value="">
+                                                                </td>
+                                                                <td>
+                                                                <input class="col-md-6 form-control" name="examencode_glaszetter[examen_glaszetter]" value="">
+                                                                </td>
+                                                                <td>
+                                                                <input class="col-md-6 form-control" name="examencijfer_glaszetter[examen_glaszetter]" value="">
+                                                                </td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -456,15 +517,15 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-6"><strong>Datum hercertificering glaszetter</strong></div>
-                                                <input class="col-md-6 form-control" name="[{{ $key }}]" value="{{@$certifications[0]['datum_hercertificering_glaszetter']}}">
+                                                <input class="col-md-6 form-control" name="datum_hercertificering_glaszetter[{{ $certification[0]['id'] }}]" value="{{@$certifications[0]['datum_hercertificering_glaszetter']}}">
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6"><strong>Vervaldatum hercertificering glaszetter </strong></div>
-                                                <input class="col-md-6 form-control" name="[{{ $key }}]" value="{{$certifications[0]['vervaldatum_hercertificering_glaszetter'] ? @date('d-m-Y',strtotime($certifications[0]['vervaldatum_hercertificering_glaszetter'])) : ''}}">
+                                                <input class="col-md-6 form-control" name="vervaldatum_hercertificering_glaszetter[{{ $certification[0]['id'] }}]" value="{{$certifications[0]['vervaldatum_hercertificering_glaszetter'] ? @date('d-m-Y',strtotime($certifications[0]['vervaldatum_hercertificering_glaszetter'])) : ''}}">
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6"><strong>Hercertificeringscode glaszetter</strong></div>
-                                                <input class="col-md-6 form-control" name="[{{ $key }}]" value="{{$certifications[0]['hercertificeringscode_glaszetter'] ? @date('d-m-Y',strtotime($certifications[0]['hercertificeringscode_glaszetter'])) : ''}}">
+                                                <input class="col-md-6 form-control" name="hercertificeringscode_glaszetter[{{ $certification[0]['id'] }}]" value="{{$certifications[0]['hercertificeringscode_glaszetter'] ? @date('d-m-Y',strtotime($certifications[0]['hercertificeringscode_glaszetter'])) : ''}}">
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -480,16 +541,27 @@
                                                             @foreach ($certifications as $key => $certification)
                                                             <tr>
                                                                 <td>
-                                                                    <input class="col-md-6 form-control" name="hercertificeringscode_glaszetter[{{ $key }}]" value="{{$certification['hercertificeringscode_glaszetter']}}">
+                                                                    <input class="col-md-6 form-control" name="hercertificeringscode_glaszetter[{{ $certification['id'] }}]" value="{{$certification['hercertificeringscode_glaszetter']}}">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="col-md-6 form-control" name="hercertificeringscijfer_glaszetter[{{ $key }}]" value="{{$certification['hercertificeringscijfer_glaszetter']}}">
+                                                                    <input class="col-md-6 form-control" name="hercertificeringscijfer_glaszetter[{{ $certification['id'] }}]" value="{{$certification['hercertificeringscijfer_glaszetter']}}">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="col-md-6 form-control" name="hercertificeringspasnummer_glaszetter[{{ $key }}]" value="{{$certification['hercertificeringspasnummer_glaszetter']}}">
+                                                                    <input class="col-md-6 form-control" name="hercertificeringspasnummer_glaszetter[{{ $certification['id'] }}]" value="{{$certification['hercertificeringspasnummer_glaszetter']}}">
                                                                 </td>
                                                             </tr>
                                                             @endforeach
+                                                            <tr>
+                                                                <td>
+                                                                    <input class="col-md-6 form-control" name="hercertificeringscode_glaszetter[hercertificeringscode_glaszetter]" value="{{$certification['hercertificeringscode_glaszetter']}}">
+                                                                </td>
+                                                                <td>
+                                                                    <input class="col-md-6 form-control" name="hercertificeringscijfer_glaszetter[hercertificeringscode_glaszetter]" value="{{$certification['hercertificeringscijfer_glaszetter']}}">
+                                                                </td>
+                                                                <td>
+                                                                    <input class="col-md-6 form-control" name="hercertificeringspasnummer_glaszetter[hercertificeringscode_glaszetter]" value="{{$certification['hercertificeringspasnummer_glaszetter']}}">
+                                                                </td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>

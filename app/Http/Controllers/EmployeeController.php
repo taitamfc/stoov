@@ -298,7 +298,8 @@ class EmployeeController extends Controller
 	}
 	public function update(Request $request,String $id)
 	{
-		// dd($request);
+		// dd($request->all());
+		$employee = Employee::find($id);
 		$logged_user = auth()->user();
 		if ($logged_user->can('store-details-employee')) {
 			if (request()->ajax() || true) {
@@ -342,26 +343,80 @@ class EmployeeController extends Controller
 						'required' => 'Het veld :attribute is verplicht.'
 					]
 				);
-				if ($validator->fails()) {
-					if (!request()->ajax() ) {
-						return redirect()->back()->with(['errors' => $this->valid($validator)]);
-					}
-					return response()->json(['errors' => $this->valid($validator)]);
-				}
+				// if ($validator->fails()) {
+				// 	if (!request()->ajax() ) {
+				// 		return redirect()->back()->with(['errors' => $this->valid($validator)]);
+				// 	}
+				// 	return response()->json(['errors' => $this->valid($validator)]);
+				// }
 				DB::beginTransaction();
 				try {
 					unset($params['company_ids']);
-					$params['geboortedatum'] = date('Y-m-d', strtotime($params['geboortedatum']));
-					$params['vervaldatum_glasmonteur'] = date('Y-m-d', strtotime($params['vervaldatum_glasmonteur']));
-					$params['vervaldatum_glaszetter'] = date('Y-m-d', strtotime($params['vervaldatum_glaszetter']));
-					$params['vevaldatum_vca'] = date('Y-m-d', strtotime($params['vevaldatum_vca']));
-					$params['onderaannemer_sinds'] = date('Y-m-d', strtotime($params['onderaannemer_sinds']));
-					$params['indienst_sinds'] = date('Y-m-d', strtotime($params['indienst_sinds']));
-					$employee = Employee::create($params);
-					foreach($request->company_ids as $company) {
-						$employee->companies()->attach($company);
+					if(!empty($params['geboortedatum'])){
+						$params['geboortedatum'] =  date('Y-m-d', strtotime($params['geboortedatum']));
 					}
-					
+					if(!empty($params['vervaldatum_glasmonteur'])){
+						$params['vervaldatum_glasmonteur'] = date('Y-m-d', strtotime($params['vervaldatum_glasmonteur']));
+					}
+					if(!empty($params['vervaldatum_glaszetter'])){
+						$params['vervaldatum_glaszetter'] = date('Y-m-d', strtotime($params['vervaldatum_glaszetter']));
+					}
+					if(!empty($params['vevaldatum_vca'])){
+						$params['vevaldatum_vca'] = date('Y-m-d', strtotime($params['vevaldatum_vca']));
+					}
+					if(!empty($params['onderaannemer_sinds'])){
+						$params['onderaannemer_sinds'] = date('Y-m-d', strtotime($params['onderaannemer_sinds']));
+					}
+					if(!empty($params['onderaannemer_sinds'])){
+						$params['indienst_sinds'] = date('Y-m-d', strtotime($params['indienst_sinds']));
+					}
+					if( count($params) ){
+						$employee->update($params);
+						$employee->companies()->detach();
+						foreach($request->company_ids as $company) {
+							$employee->companies()->attach($company);
+						}
+					}
+
+					// handle update certification
+					$cert_fields = [
+						"pasje_gecertificeerd_glasmonteur",
+						"datum_gecertificeerd_glasmonteur",
+						"vervaldatum_gecertificeerd_glasmonteur",
+						"examen_glasmonteur",
+						"examencode_glasmonteur",
+						"examencijfer_glasmonteur",
+						"pasje_gecertificeerd_glaszetter",
+						"datum_gecertificeerd_glaszetter",
+						"vervaldatum_gecertificeerd_glaszetter",
+						"examen_glaszetter",
+						"examencode_glaszetter",
+						"examencijfer_glaszetter"
+					];
+					$certs = [];
+					foreach( $cert_fields as $cert_field ){
+						foreach( $request->input($cert_field) as $cert_id => $value ){
+							$certs[$cert_id][$cert_field] = $value;
+						}
+					}
+					if( count($certs) ){
+						foreach( $certs as $cert_id => $cert_data ){
+							if( is_numeric($cert_id) ){
+								\App\Certification::where('id',$cert_id)->update($cert_data);
+							}else{
+								$cert_data_check = array_values($cert_data);
+								if( !empty($cert_data_check[0]) && !empty($cert_data_check[1]) && !empty($cert_data_check[2]) ){
+									// Create new certification
+									try {
+										$employee->certifications()->create($cert_data);
+										//code...
+									} catch (Exception $e) {
+										echo $e->getMessages();
+									}
+								}
+							}
+						}
+					}
 					DB::commit();
 				} catch (Exception $e) {
 					DB::rollback();
@@ -477,16 +532,30 @@ class EmployeeController extends Controller
 				try {
 					unset($params['company_ids']);
 					$employee = Employee::find($employee);
-					$params['geboortedatum'] = date('Y-m-d', strtotime($params['geboortedatum']));
-					$params['vervaldatum_glasmonteur'] = date('Y-m-d', strtotime($params['vervaldatum_glasmonteur']));
-					$params['vervaldatum_glaszetter'] = date('Y-m-d', strtotime($params['vervaldatum_glaszetter']));
-					$params['vevaldatum_vca'] = date('Y-m-d', strtotime($params['vevaldatum_vca']));
-					$params['onderaannemer_sinds'] = date('Y-m-d', strtotime($params['onderaannemer_sinds']));
-					$params['indienst_sinds'] = date('Y-m-d', strtotime($params['indienst_sinds']));
-					$employee->update($params);
-					$employee->companies()->detach();
-					foreach($request->company_ids as $company) {
-						$employee->companies()->attach($company);
+					if(!empty($params['geboortedatum'])){
+						$params['geboortedatum'] =  date('Y-m-d', strtotime($params['geboortedatum']));
+					}
+					if(!empty($params['vervaldatum_glasmonteur'])){
+						$params['vervaldatum_glasmonteur'] = date('Y-m-d', strtotime($params['vervaldatum_glasmonteur']));
+					}
+					if(!empty($params['vervaldatum_glaszetter'])){
+						$params['vervaldatum_glaszetter'] = date('Y-m-d', strtotime($params['vervaldatum_glaszetter']));
+					}
+					if(!empty($params['vevaldatum_vca'])){
+						$params['vevaldatum_vca'] = date('Y-m-d', strtotime($params['vevaldatum_vca']));
+					}
+					if(!empty($params['onderaannemer_sinds'])){
+						$params['onderaannemer_sinds'] = date('Y-m-d', strtotime($params['onderaannemer_sinds']));
+					}
+					if(!empty($params['onderaannemer_sinds'])){
+						$params['indienst_sinds'] = date('Y-m-d', strtotime($params['indienst_sinds']));
+					}
+					if( count($params) ){
+						$employee->update($params);
+						$employee->companies()->detach();
+						foreach($request->company_ids as $company) {
+							$employee->companies()->attach($company);
+						}
 					}
 					DB::commit();
 				} catch (Exception $e) {

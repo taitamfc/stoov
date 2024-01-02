@@ -99,7 +99,7 @@ class CourseService
             if (isset($id)) {
                 $course = Course::find($id);
                 if (isset($request->is_approved)) {
-                    $data = [];
+                    // $data = [];
                     $data['is_approved'] = $request->is_approved;
                     if (
                         ($course->is_approved == Course::IS_APPROVED_NO || $course->is_approved == Course::IS_WAIT_CONFIRM) &&
