@@ -172,11 +172,15 @@
             <tbody>
                 <tr>
                     <td class="td-label title-table">Datum uitgifte</td>
-                    <td class="td-value" style="width: 200px;">{{ $certification['datum_uitgifte_vca'] }}</td>
+                    <td class="td-value" style="width: 200px;">
+                        {{ date('d-m-Y',strtotime($certification['datum_uitgifte_vca'])) }}
+                    </td>
                 </tr>
                 <tr>
                     <td class="td-label title-table">Geldig tot </td>
-                    <td class="td-value" style="width: 200px;">{{ $certification['vervaldatum_gecertificeerd_glasmonteur'] }}</td>
+                    <td class="td-value" style="width: 200px;">
+                        {{ date('d-m-Y',strtotime($certification['vervaldatum_gecertificeerd_glasmonteur'])) }}
+                    </td>
                 </tr>
             </tbody>
         </table>

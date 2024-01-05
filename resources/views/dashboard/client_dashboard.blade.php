@@ -14,7 +14,7 @@
                 <h4 class="font-weight-bold">{{$client->first_name}} {{$client->last_name}} <span class="text-muted">({{$user->username}})</span>
                 </h4>
                 <!-- <div class="text-muted mb-2">{{__('Berdrijf')}}: {{$client->company_name}}</div> -->
-                <p class="text-muted pb-0-5">{{__('Last Login')}}: {{$user->last_login_date}}</p>
+                <!-- <p class="text-muted pb-0-5">{{__('Last Login')}}: {{$user->last_login_date}}</p> -->
 
                 <a href="{{route('clientProfile')}}">
                     <button class="btn btn-primary btn-block text-uppercase" id="my_profile"><i class="ion-person"></i>{{__('Profile')}}</button>
@@ -23,9 +23,8 @@
         </div>
         @if(!$checkSubmitLoomsom)
         <div class="row">
-            <!-- <div class="col-12">
-                <p>Jaar, omschrijving
-                    {{ now()->year  }} <a href="{{ route('client-get-loonsomopgave') }}">Loonsompgave</a></p>
+            <div class="col-12">
+                <!-- <p>Jaar, omschrijving {{ now()->year - 1  }} <a href="{{ route('client-get-loonsomopgave') }}">Loonsompgave</a></p> -->
             </div>
             
         </div>
@@ -42,8 +41,8 @@
                         </thead>
                         <tbody>
                             <tr>
-                            <td>{{ now()->year }}</td>
-                            <td>Loonsomopgave {{ now()->year }}</td>
+                            <td>{{ now()->year - 1 }}</td>
+                            <td>Loonsomopgave {{ now()->year - 1 }}</td>
                             <td><a href="{{ route('client-get-loonsomopgave') }}">{{ __('Verwerken Aangifte') }}</a></td>
                             </tr>
                         </tbody>

@@ -366,7 +366,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-6"><strong>Datum hercertificering glasmonteur</strong></div>
-                                            <div class="col-md-6">{{@$certifications[0]['datum_hercertificering_glasmonteur']}}</div>
+                                            <div class="col-md-6">{{@$certifications[0]['datum_hercertificering_glasmonteur'] ? @date('d-m-Y',strtotime($certifications[0]['datum_hercertificering_glasmonteur'])) : ''}}</div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6"><strong>Vervaldatum hercertificering glasmonteur </strong></div>
@@ -374,7 +374,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6"><strong>Hercertificeringscode glasmonteur</strong></div>
-                                            <div class="col-md-6">{{$certifications[0]['hercertificeringscode_glasmonteur'] ? @date('d-m-Y',strtotime($certifications[0]['hercertificeringscode_glasmonteur'])) : ''}}</div>
+                                            <div class="col-md-6">{{$certifications[0]['hercertificeringscode_glasmonteur'] ? $certifications[0]['hercertificeringscode_glasmonteur'] : ''}}</div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">

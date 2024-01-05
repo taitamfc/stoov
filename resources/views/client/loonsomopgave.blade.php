@@ -5,7 +5,7 @@
             <div class="content-editor">
                 <h1 class="single-title">Loonsomopgave</h1>
                 <time class="posted-on published" datetime="2018-11-12"></time>
-                <p>Met dit online formulier kunt u uw loonsom over het <u>kalenderjaar {{ date('Y') }}</u> doorgeven aan het Stichting
+                <p>Met dit online formulier kunt u uw loonsom over het <u>kalenderjaar {{ now()->year - 1 }}</u> doorgeven aan het Stichting
                     Opleidings- en Ontwikkelingsfonds voor de Vlakglasbranche (Stoov).</p>
 
                 <p>Nadat u het formulier heeft ingevuld en verzonden, krijgt u per e-mail een bevestiging van ons.<br>
@@ -147,7 +147,7 @@
                                                         type="radio" value="{{ $index }}"
                                                         id="choice_personeel_in_loondienst_{{ $index - 1 }}" />
                                                     <label for="choice_personeel_in_loondienst_{{ $index - 1 }}"
-                                                        id="label_personeel_in_loondienst_{{ $index - 1 }}">{{ str_replace('2021', date('Y'), $value) }}</label>
+                                                        id="label_personeel_in_loondienst_{{ $index - 1 }}">{{ str_replace('2021', now()->year - 1, $value) }}</label>
                                                 </div>
                                             @endforeach
                                         </ul>
@@ -202,14 +202,14 @@
                                             dan of gelijk aan <strong>2</strong> in. </div>
                                     </div>
                                     <div class="gfield_description" id="gfield_description_loonsom">Vul hier in het totale
-                                        bedrag aan ULB-loon (Uniform Loonbegrip) over {{ date('Y') }} voor het totaal aantal
-                                        werknemers, gemaximeerd tot het maximum premieloon. Voor {{ date('Y') }} is dat € 58.311,- per
+                                        bedrag aan ULB-loon (Uniform Loonbegrip) over {{ now()->year - 1 }} voor het totaal aantal
+                                        werknemers, gemaximeerd tot het maximum premieloon. Voor {{ now()->year - 1 }} is dat € 58.311,- per
                                         werknemer.</div>
                                 </div>
                                 <div id="field_aantal_medewerkers"
                                     class="gfield gfield_contains_required field_sublabel_below field_description_below gfield_visibility_visible">
                                     <label class="gfield_label" for="input_aantal_medewerkers">Aantal medewerkers per 31
-                                        december {{ date('Y') }} <span class="gfield_required">
+                                        december {{ now()->year - 1 }} <span class="gfield_required">
                                             <span class="gfield_required gfield_required_asterisk">*</span>
                                         </span>
                                     </label>

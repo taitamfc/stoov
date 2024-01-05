@@ -108,10 +108,10 @@ class EmployeeController extends Controller
 				->addColumn('action', function ($data) {
 					$button = '';
 					$button .= '<a href="employees/' . $data->id . '"  class="edit btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="View Details"><i class="dripicons-preview"></i></button></a>';
-					$button .= '<a href="employees/' . $data->id . '/edit"  class="edit btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="View Details"><i class="dripicons-pencil"></i></button></a>';
-					$button .= '&nbsp;&nbsp;&nbsp;';
 					if (auth()->user()->can('modify-details-employee')) {
 						if ($data->role_users_id != 1) {
+							$button .= '<a href="employees/' . $data->id . '/edit"  class="edit btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="View Details"><i class="dripicons-pencil"></i></button></a>';
+							$button .= '&nbsp;&nbsp;&nbsp;';
 							$button .= '<button type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete"><i class="dripicons-trash"></i></button>';
 							$button .= '&nbsp;&nbsp;&nbsp;';
 						}

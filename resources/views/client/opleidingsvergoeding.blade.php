@@ -162,14 +162,14 @@
                                     </span>
                                 </label>
                                 <div class="ginput_container ginput_container_number">
-                                    <input readonly name="totaalbedrag_subsidie_aanvraag" id="input_totaalbedrag_subsidie_aanvraag" type="text" value="" class="medium">
+                                    <input style="text-align:left;" name="totaalbedrag_subsidie_aanvraag" id="input_totaalbedrag_subsidie_aanvraag" type="number" min="0" value="" class="medium">
                                 </div>
                             </div>
                             <div id="field_uw_vergoeding_bedraagt" class=" gf-col-2 gfield gfield_contains_required  gf-col-2  ">
                                 <label class="gfield_label" for="input_uw_vergoeding_bedraagt">Uw vergoeding bedraagt
                                 </label>
                                 <div class="ginput_container ginput_container_number">
-                                    <input name="uw_vergoeding_bedraagt" id="input_uw_vergoeding_bedraagt" type="text" value="" class="medium">
+                                    <input readonly name="uw_vergoeding_bedraagt" id="input_uw_vergoeding_bedraagt" type="text" value="" class="medium">
                                 </div>
                             </div>
                             <div id="field_totaalbedrag_subsidie_aanvraag" class="gfield gfield_contains_required  gf-col-2   ">
@@ -425,12 +425,15 @@
             if (input_course == 'Ja') {
                 $('#field_naam_cursus').show();
                 $('#input_subsidiepercentage_dat_van_toepassing_is').prop('readonly', true).val('');
-                $('#input_totaalbedrag_subsidie_aanvraag').prop('readonly', true).val('');
+                // $('#input_totaalbedrag_subsidie_aanvraag').prop('readonly', true).val('');
+                
             } else {
                 $('#input_naam_cursus').val('');
                 $('#field_naam_cursus').hide();
                 $('#input_subsidiepercentage_dat_van_toepassing_is').prop('readonly', false).val('');
-                $('#input_totaalbedrag_subsidie_aanvraag').prop('readonly', false).val('');
+                // $('#input_totaalbedrag_subsidie_aanvraag').prop('readonly', false).val('');
+                $('#input_totaalbedrag_subsidie_aanvraag').val('')
+                $('#input_uw_vergoeding_bedraagt').val('')
             }
         });
         $('#input_deelnemers').change(function() {
@@ -448,8 +451,13 @@
                 // percentage = parseFloat(percentage).toFixed(2);
                 price = parseFloat(price).toFixed(2);
                 $('#input_subsidiepercentage_dat_van_toepassing_is').val(percentage)
-                $('#input_totaalbedrag_subsidie_aanvraag').val(price)
+                // $('#input_totaalbedrag_subsidie_aanvraag').val(price)
             }
+        });
+        $('#input_totaalbedrag_subsidie_aanvraag').keyup(function() {
+            let subsidiepercentage = $('#input_subsidiepercentage_dat_van_toepassing_is').val();
+            let uw_vergoeding_bedraagt = $(this).val() * (subsidiepercentage/100);
+            $('#input_uw_vergoeding_bedraagt').val(uw_vergoeding_bedraagt).toFixed(2);
         });
         $('#input_naam_cursus').select2({
             sorter: data => data.sort((a, b) => a.text.localeCompare(b.text)),
